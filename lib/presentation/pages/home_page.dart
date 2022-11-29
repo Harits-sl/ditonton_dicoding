@@ -1,23 +1,15 @@
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
+import 'package:ditonton/presentation/pages/home_tv_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +28,8 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.movie),
               title: Text('Movies'),
               onTap: () {
+                Provider.of<HomeNotifier>(context, listen: false).setBodyState =
+                    BodyState.Movie;
                 Navigator.pop(context);
               },
             ),
@@ -43,7 +37,9 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.tv),
               title: Text('Tvs'),
               onTap: () {
-                // Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+                Provider.of<HomeNotifier>(context, listen: false).setBodyState =
+                    BodyState.Tv;
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -74,7 +70,17 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Provider.of<HomeNotifier>(context).getBody(),
+      body: Consumer<HomeNotifier>(
+        builder: ((context, data, _) {
+          if (data.bodyState == BodyState.Movie) {
+            return HomeMoviePage();
+          }
+          if (data.bodyState == BodyState.Tv) {
+            return HomeTvPage();
+          }
+          return const SizedBox();
+        }),
+      ),
     );
   }
 }
