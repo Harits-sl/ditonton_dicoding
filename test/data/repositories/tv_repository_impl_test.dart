@@ -12,12 +12,12 @@ import 'package:mockito/mockito.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late TvResponseImpl repository;
+  late TvRepositoryImpl repository;
   late MockTvRemoteDataSource mockTvRemoteDataSource;
 
   setUp(() {
     mockTvRemoteDataSource = MockTvRemoteDataSource();
-    repository = TvResponseImpl(remoteDataSource: mockTvRemoteDataSource);
+    repository = TvRepositoryImpl(remoteDataSource: mockTvRemoteDataSource);
   });
 
   final tTvModel = TvModel(

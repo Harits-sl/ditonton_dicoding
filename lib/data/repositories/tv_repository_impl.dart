@@ -8,10 +8,10 @@ import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/repositories/tv_repository.dart';
 
-class TvResponseImpl implements TvRepository {
+class TvRepositoryImpl implements TvRepository {
   final TvRemoteDataSource remoteDataSource;
 
-  TvResponseImpl({
+  TvRepositoryImpl({
     required this.remoteDataSource,
   });
 
