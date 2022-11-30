@@ -6,8 +6,10 @@ import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/now_playing_tvs_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
+import 'package:ditonton/presentation/pages/popular_tvs_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/top_rated_tvs_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
@@ -15,7 +17,9 @@ import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/now_playing_tvs_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/popular_tvs_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:flutter/cupertino.dart';
@@ -60,6 +64,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<NowPlayingTvsNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<PopularTvsNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TopRatedTvsNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -81,6 +91,10 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
             case NowPlayingTvsPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => NowPlayingTvsPage());
+            case PopularTvsPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => PopularTvsPage());
+            case TopRatedTvsPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => TopRatedTvsPage());
             case MovieDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;
               return MaterialPageRoute(

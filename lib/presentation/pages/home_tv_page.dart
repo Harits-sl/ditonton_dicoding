@@ -3,8 +3,10 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/now_playing_tvs_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
+import 'package:ditonton/presentation/pages/popular_tvs_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/pages/top_rated_tvs_page.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/sub_heading.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SubHeading(
-              title: 'Now playing',
+              title: 'Now playing Tvs',
               onTap: () =>
                   Navigator.pushNamed(context, NowPlayingTvsPage.ROUTE_NAME),
             ),
@@ -52,9 +54,9 @@ class _HomeTvPageState extends State<HomeTvPage> {
               }
             }),
             SubHeading(
-              title: 'popular',
+              title: 'Popular Tvs',
               onTap: () =>
-                  Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+                  Navigator.pushNamed(context, PopularTvsPage.ROUTE_NAME),
             ),
             Consumer<TvListNotifier>(builder: (context, data, child) {
               final state = data.popularState;
@@ -69,9 +71,9 @@ class _HomeTvPageState extends State<HomeTvPage> {
               }
             }),
             SubHeading(
-              title: 'Top Rated',
+              title: 'Top Rated Tvs',
               onTap: () =>
-                  Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+                  Navigator.pushNamed(context, TopRatedTvsPage.ROUTE_NAME),
             ),
             Consumer<TvListNotifier>(builder: (context, data, child) {
               final state = data.topRatedState;
