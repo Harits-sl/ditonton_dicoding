@@ -2,6 +2,7 @@ import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/tv_detail.dart';
 
 final testMovie = Movie(
   adult: false,
@@ -57,3 +58,17 @@ final testMovieMap = {
   'posterPath': 'posterPath',
   'title': 'title',
 };
+
+// object Tv
+final testTvDetail = TvDetail(
+  backdropPath: 'backdropPath',
+  genres: [Genre(id: 1, name: 'Action')],
+  id: 1,
+  originalName: 'originalName',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  firstAirDate: '2020-1-1',
+  name: 'name',
+  voteAverage: 1,
+  voteCount: 1,
+);
