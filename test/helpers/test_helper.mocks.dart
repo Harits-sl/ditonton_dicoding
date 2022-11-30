@@ -323,6 +323,12 @@ class MockTvRemoteDataSource extends _i1.Mock
           Invocation.method(#getTopRatedTvs, []),
           returnValue: _i6.Future<List<_i19.TvModel>>.value(<_i19.TvModel>[]))
       as _i6.Future<List<_i19.TvModel>>);
+  @override
+  _i6.Future<List<_i19.TvModel>> searchTvs(String? query) =>
+      (super.noSuchMethod(Invocation.method(#searchTvs, [query]),
+              returnValue:
+                  _i6.Future<List<_i19.TvModel>>.value(<_i19.TvModel>[]))
+          as _i6.Future<List<_i19.TvModel>>);
 }
 
 /// A class which mocks [Client].

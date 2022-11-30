@@ -3,6 +3,7 @@ import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/home_tv_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
+import 'package:ditonton/presentation/pages/tv_search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter/material.dart';
@@ -64,22 +65,26 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              var bodyState =
+                  Provider.of<HomeNotifier>(context, listen: false).bodyState;
+              if (bodyState == BodyState.Movie) {
+                Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              } else {
+                Navigator.pushNamed(context, TvSearchPage.ROUTE_NAME);
+              }
             },
             icon: Icon(Icons.search),
           )
         ],
       ),
       body: Consumer<HomeNotifier>(
-        builder: ((context, data, _) {
+        builder: (context, data, _) {
           if (data.bodyState == BodyState.Movie) {
             return HomeMoviePage();
-          }
-          if (data.bodyState == BodyState.Tv) {
+          } else {
             return HomeTvPage();
           }
-          return const SizedBox();
-        }),
+        },
       ),
     );
   }

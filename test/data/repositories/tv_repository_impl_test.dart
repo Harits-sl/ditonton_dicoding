@@ -21,33 +21,33 @@ void main() {
   });
 
   final tTvModel = TvModel(
-    posterPath: '/cvhNj9eoRBe5SxjCbQTkh05UP5K.jpg',
-    popularity: 1377.974,
-    id: 60625,
-    backdropPath: '/uGy4DCmM33I7l86W7iCskNkvmLD.jpg',
-    voteAverage: 8.7,
+    posterPath: '/jeGtaMwGxPmQN5xM4ClnwPQcNQz.jpg',
+    popularity: 1397.308,
+    id: 119051,
+    backdropPath: '/9DpB6wC1iY5jxLz91RT8tIIsXaf.jpg',
+    voteAverage: 8.8,
     overview:
-        "Rick is a mentally-unbalanced but scientifically gifted old man who has recently reconnected with his family. He spends most of his time involving his young grandson Morty in dangerous, outlandish adventures throughout space and alternate universes. Compounded with Morty's already unstable family life, these events cause Morty much distress at home and school.",
-    firstAirDate: '2022-09-26',
-    genreIds: [16, 35, 10765, 10759],
-    voteCount: 7426,
-    name: 'Rick and Morty',
-    originalName: 'Rick and Morty',
+        "Wednesday Addams is sent to Nevermore Academy, a bizarre boarding school where she attempts to master her psychic powers, stop a monstrous killing spree of the town citizens, and solve the supernatural mystery that affected her family 25 years ago - all while navigating her new relationships.",
+    firstAirDate: '2022-11-23',
+    genreIds: [10765, 9648, 35],
+    voteCount: 686,
+    name: 'Wednesdayy',
+    originalName: 'Wednesdayy',
   );
 
   final tTv = Tv(
-    posterPath: '/cvhNj9eoRBe5SxjCbQTkh05UP5K.jpg',
-    popularity: 1377.974,
-    id: 60625,
-    backdropPath: '/uGy4DCmM33I7l86W7iCskNkvmLD.jpg',
-    voteAverage: 8.7,
+    posterPath: '/jeGtaMwGxPmQN5xM4ClnwPQcNQz.jpg',
+    popularity: 1397.308,
+    id: 119051,
+    backdropPath: '/9DpB6wC1iY5jxLz91RT8tIIsXaf.jpg',
+    voteAverage: 8.8,
     overview:
-        "Rick is a mentally-unbalanced but scientifically gifted old man who has recently reconnected with his family. He spends most of his time involving his young grandson Morty in dangerous, outlandish adventures throughout space and alternate universes. Compounded with Morty's already unstable family life, these events cause Morty much distress at home and school.",
-    firstAirDate: '2022-09-26',
-    genreIds: [16, 35, 10765, 10759],
-    voteCount: 7426,
-    name: 'Rick and Morty',
-    originalName: 'Rick and Morty',
+        "Wednesday Addams is sent to Nevermore Academy, a bizarre boarding school where she attempts to master her psychic powers, stop a monstrous killing spree of the town citizens, and solve the supernatural mystery that affected her family 25 years ago - all while navigating her new relationships.",
+    firstAirDate: '2022-11-23',
+    genreIds: [10765, 9648, 35],
+    voteCount: 686,
+    name: 'Wednesdayy',
+    originalName: 'Wednesdayy',
   );
 
   final tTvModelList = <TvModel>[tTvModel];
@@ -181,6 +181,47 @@ void main() {
       verify(mockTvRemoteDataSource.getTopRatedTvs());
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
+    });
+  });
+
+  group('Seach Tvs', () {
+    final tQuery = 'wednesday';
+
+    test('should return tv list when call to data source is successful',
+        () async {
+      // arrange
+      when(mockTvRemoteDataSource.searchTvs(tQuery))
+          .thenAnswer((_) async => tTvModelList);
+      // act
+      final result = await repository.searchTvs(tQuery);
+      // assert
+      /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, tTvList);
+    });
+
+    test('should return ServerFailure when call to data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockTvRemoteDataSource.searchTvs(tQuery))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.searchTvs(tQuery);
+      // assert
+      expect(result, Left(ServerFailure('')));
+    });
+
+    test(
+        'should return ConnectionFailure when device is not connected to the internet',
+        () async {
+      // arrange
+      when(mockTvRemoteDataSource.searchTvs(tQuery))
+          .thenThrow(SocketException('Failed to connect to the network'));
+      // act
+      final result = await repository.searchTvs(tQuery);
+      // assert
+      expect(
+          result, Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
 }
