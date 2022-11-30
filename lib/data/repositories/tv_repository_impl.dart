@@ -50,4 +50,10 @@ class TvRepositoryImpl implements TvRepository {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Tv>>> searchTvs(String query) {
+    // TODO: implement searchTvs
+    throw UnimplementedError();
+  }
 }

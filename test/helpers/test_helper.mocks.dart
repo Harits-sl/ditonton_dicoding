@@ -290,6 +290,13 @@ class MockTvRepository extends _i1.Mock implements _i16.TvRepository {
               _FakeEither_0<_i7.Failure, List<_i17.Tv>>(
                   this, Invocation.method(#getTopRatedTvs, [])))) as _i6
           .Future<_i2.Either<_i7.Failure, List<_i17.Tv>>>);
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, List<_i17.Tv>>> searchTvs(String? query) =>
+      (super.noSuchMethod(Invocation.method(#searchTvs, [query]),
+          returnValue: _i6.Future<_i2.Either<_i7.Failure, List<_i17.Tv>>>.value(
+              _FakeEither_0<_i7.Failure, List<_i17.Tv>>(
+                  this, Invocation.method(#searchTvs, [query])))) as _i6
+          .Future<_i2.Either<_i7.Failure, List<_i17.Tv>>>);
 }
 
 /// A class which mocks [TvRemoteDataSource].
