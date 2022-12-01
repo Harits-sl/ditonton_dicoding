@@ -2,11 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/presentation/pages/now_playing_tvs_page.dart';
-import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/popular_tvs_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/pages/top_rated_tvs_page.dart';
+import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/sub_heading.dart';
 import 'package:flutter/material.dart';
@@ -111,11 +110,11 @@ class TvList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
-                // Navigator.pushNamed(
-                //   context,
-                //   MovieDetailPage.ROUTE_NAME,
-                //   arguments: tv.id,
-                // );
+                Navigator.pushNamed(
+                  context,
+                  TvDetailPage.ROUTE_NAME,
+                  arguments: tv.id,
+                );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
