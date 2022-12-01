@@ -64,6 +64,7 @@ final testTvDetail = TvDetail(
   backdropPath: 'backdropPath',
   genres: [Genre(id: 1, name: 'Action')],
   id: 1,
+  episodeRunTime: [10],
   originalName: 'originalName',
   overview: 'overview',
   posterPath: 'posterPath',

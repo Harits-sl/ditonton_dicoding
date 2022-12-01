@@ -147,6 +147,7 @@ class TvDetailResponse extends Equatable {
         backdropPath: this.backdropPath,
         genres: this.genres.map((genre) => genre.toEntity()).toList(),
         id: this.id,
+        episodeRunTime: this.episodeRunTime,
         originalName: this.originalName,
         overview: this.overview,
         posterPath: this.posterPath,

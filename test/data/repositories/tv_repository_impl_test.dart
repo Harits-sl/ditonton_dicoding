@@ -192,7 +192,7 @@ void main() {
     final tTvDetailResponse = TvDetailResponse(
       backdropPath: 'backdropPath',
       createdBy: [],
-      episodeRunTime: [1],
+      episodeRunTime: [10],
       firstAirDate: '2020-1-1',
       genres: [GenreModel(id: 1, name: 'Action')],
       homepage: 'homepage',
