@@ -3,12 +3,15 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/tv_detail_model.dart';
 import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/repositories/tv_repository_impl.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
@@ -179,6 +182,83 @@ void main() {
       final result = await repository.getTopRatedTvs();
       // assert
       verify(mockTvRemoteDataSource.getTopRatedTvs());
+      expect(result,
+          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+    });
+  });
+
+  group('Get Movie Detail', () {
+    final tId = 1;
+    final tTvDetailResponse = TvDetailResponse(
+      backdropPath: 'backdropPath',
+      createdBy: [],
+      episodeRunTime: [1],
+      firstAirDate: '2020-1-1',
+      genres: [GenreModel(id: 1, name: 'Action')],
+      homepage: 'homepage',
+      id: 1,
+      inProduction: false,
+      languages: ['en'],
+      lastAirDate: 'lastAirDate',
+      lastEpisodeToAir: {},
+      name: 'name',
+      nextEpisodeToAir: 'nextEpisodeToAir',
+      networks: [],
+      numberOfEpisodes: 1,
+      numberOfSeasons: 1,
+      originCountry: [],
+      originalLanguage: 'originalLanguage',
+      originalName: 'originalName',
+      overview: 'overview',
+      popularity: 1,
+      posterPath: 'posterPath',
+      productionCompanies: [],
+      productionCountries: ['productionCountries'],
+      seasons: [],
+      spokenLanguages: [],
+      status: 'status',
+      tagline: 'tagline',
+      type: 'type',
+      voteAverage: 1,
+      voteCount: 1,
+    );
+
+    test(
+        'should return tv data when the call to remote data source is successful',
+        () async {
+      // arrange
+      when(mockTvRemoteDataSource.getTvDetail(tId))
+          .thenAnswer((_) async => tTvDetailResponse);
+      // act
+      final result = await repository.getTvDetail(tId);
+      // assert
+      verify(mockTvRemoteDataSource.getTvDetail(tId));
+      expect(result, equals(Right(testTvDetail)));
+    });
+
+    test(
+        'should return Server Failure when the call to remote data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockTvRemoteDataSource.getTvDetail(tId))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.getTvDetail(tId);
+      // assert
+      verify(mockTvRemoteDataSource.getTvDetail(tId));
+      expect(result, equals(Left(ServerFailure(''))));
+    });
+
+    test(
+        'should return connection failure when the device is not connected to internet',
+        () async {
+      // arrange
+      when(mockTvRemoteDataSource.getTvDetail(tId))
+          .thenThrow(SocketException('Failed to connect to the network'));
+      // act
+      final result = await repository.getTvDetail(tId);
+      // assert
+      verify(mockTvRemoteDataSource.getTvDetail(tId));
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
