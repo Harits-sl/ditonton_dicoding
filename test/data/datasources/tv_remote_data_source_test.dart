@@ -141,6 +141,39 @@ void main() {
     });
   });
 
+  group('get tv recommendations', () {
+    final tId = 1;
+    final tTvRecommendations = TvResponse.fromJson(
+            json.decode(readJson('dummy_data/tv_recommendations.json')))
+        .tvList;
+
+    test('should return list tv recommendations when the response is 200',
+        () async {
+      // arrange
+      when(mockHttpClient
+              .get(Uri.parse('$BASE_URL/tv/$tId/recommendations?$API_KEY')))
+          .thenAnswer((_) async => http.Response(
+              readJson('dummy_data/tv_recommendations.json'), 200));
+      // act
+      final result = await tvRemoteDataSource.getTvRecommendations(tId);
+      // assert
+      expect(result, equals(tTvRecommendations));
+    });
+
+    test(
+        'should throw Server Exception when the response status codeis 404 or other',
+        () {
+      // arrange
+      when(mockHttpClient
+              .get(Uri.parse('$BASE_URL/tv/$tId/recommendations?$API_KEY')))
+          .thenAnswer((_) async => http.Response('not Found', 404));
+      // act
+      final call = tvRemoteDataSource.getTvRecommendations(tId);
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
   group('search tvs', () {
     final tSearchResult = TvResponse.fromJson(
             json.decode(readJson('dummy_data/search_wednesday_tv.json')))

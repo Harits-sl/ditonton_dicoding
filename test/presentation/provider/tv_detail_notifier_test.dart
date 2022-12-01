@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_tv_detail.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/usecases/get_tv_recommendations.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -11,17 +13,21 @@ import 'tv_detail_notifier_test.mocks.dart';
 
 @GenerateMocks([
   GetTvDetail,
+  GetTvRecommendations,
 ])
 void main() {
   late TvDetailNotifier provider;
   late MockGetTvDetail mockGetTvDetail;
+  late MockGetTvRecommendations mockGetTvRecommendations;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetTvDetail = MockGetTvDetail();
+    mockGetTvRecommendations = MockGetTvRecommendations();
     provider = TvDetailNotifier(
       getTvDetail: mockGetTvDetail,
+      getTvRecommendations: mockGetTvRecommendations,
     )..addListener(() {
         listenerCallCount += 1;
       });
@@ -29,9 +35,26 @@ void main() {
 
   final tId = 1;
 
+  final tTv = Tv(
+    backdropPath: 'backdropPath',
+    genreIds: [1, 2, 3],
+    id: 1,
+    originalName: 'originalName',
+    overview: 'overview',
+    popularity: 1,
+    posterPath: 'posterPath',
+    firstAirDate: '2020-1-1',
+    name: 'name',
+    voteAverage: 1,
+    voteCount: 1,
+  );
+  final tTvs = <Tv>[tTv];
+
   void _arrangeUsecase() {
     when(mockGetTvDetail.execute(tId))
         .thenAnswer((_) async => Right(testTvDetail));
+    when(mockGetTvRecommendations.execute(tId))
+        .thenAnswer((_) async => Right(tTvs));
   }
 
   group('Get Tv Detail', () {
@@ -42,7 +65,7 @@ void main() {
       await provider.fetchTvDetail(tId);
       // assert
       verify(mockGetTvDetail.execute(tId));
-      // verify(mockGetMovieRecommendations.execute(tId));
+      verify(mockGetTvRecommendations.execute(tId));
     });
 
     test('should change state to Loading when usecase is called', () {
@@ -51,7 +74,7 @@ void main() {
       // act
       provider.fetchTvDetail(tId);
       // assert
-      expect(provider.state, RequestState.Loading);
+      expect(provider.detailState, RequestState.Loading);
       expect(listenerCallCount, 1);
     });
 
@@ -61,21 +84,21 @@ void main() {
       // act
       await provider.fetchTvDetail(tId);
       // assert
-      expect(provider.state, RequestState.Loaded);
+      expect(provider.detailState, RequestState.Loaded);
       expect(provider.tv, testTvDetail);
-      expect(listenerCallCount, 2);
+      expect(listenerCallCount, 3);
     });
 
-    // test('should change recommendation movies when data is gotten successfully',
-    //     () async {
-    //   // arrange
-    //   _arrangeUsecase();
-    //   // act
-    //   await provider.fetchMovieDetail(tId);
-    //   // assert
-    //   expect(provider.movieState, RequestState.Loaded);
-    //   expect(provider.movieRecommendations, tMovies);
-    // });
+    test('should change recommendation tvs when data is gotten successfully',
+        () async {
+      // arrange
+      _arrangeUsecase();
+      // act
+      await provider.fetchTvDetail(tId);
+      // assert
+      expect(provider.detailState, RequestState.Loaded);
+      expect(provider.tvRecommendations, tTvs);
+    });
   });
 
   // group('Get Movie Recommendations', () {
