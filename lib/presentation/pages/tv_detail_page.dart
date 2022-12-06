@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/common/state_enum.dart';
@@ -184,6 +185,21 @@ class DetailContent extends StatelessWidget {
                             ),
                             SizedBox(height: 16),
                             Text(
+                              'Seasons',
+                              style: kHeading6,
+                            ),
+                            SizedBox(
+                              height: 150,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: tv.seasons.length,
+                                itemBuilder: ((context, index) {
+                                  return CardSeason(tv.seasons[index]);
+                                }),
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
                               'Recommendations',
                               style: kHeading6,
                             ),
@@ -303,5 +319,68 @@ class DetailContent extends StatelessWidget {
     } else {
       return '${minutes}m';
     }
+  }
+}
+
+class CardSeason extends StatelessWidget {
+  CardSeason(this.season);
+
+  final Season season;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+            child: season.posterPath != ''
+                ? CachedNetworkImage(
+                    imageUrl:
+                        'https://image.tmdb.org/t/p/w500${season.posterPath}',
+                    placeholder: (context, url) => Container(
+                      width: 95,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  )
+                : Container(
+                    color: kDavysGrey,
+                    width: 95,
+                    height: double.infinity,
+                    child: Icon(
+                      Icons.image_outlined,
+                      color: Colors.white70,
+                      size: 34,
+                    ),
+                  ),
+          ),
+        ),
+        Positioned(
+          right: 0,
+          child: Container(
+            margin: const EdgeInsets.only(right: 4, top: 4),
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color: kMikadoYellow,
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(8), bottomLeft: Radius.circular(8)),
+            ),
+            child: Text(
+              'Season ${season.seasonNumber}\n${season.episodeCount} eps',
+              style: TextStyle(
+                color: kRichBlack,
+                height: 1.2,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
