@@ -40,6 +40,7 @@ class TvCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
+                    Text('- Tv Series -'),
                     SizedBox(height: 16),
                     Text(
                       tv.overview ?? '-',

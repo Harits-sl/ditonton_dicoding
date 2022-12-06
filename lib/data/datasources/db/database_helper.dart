@@ -33,7 +33,8 @@ class DatabaseHelper {
   }
 
   void _onCreate(Database db, int version) async {
-    await db.execute('''
+    await db.execute(
+        '''
       CREATE TABLE  $_tblWatchlist (
         id INTEGER PRIMARY KEY,
         title TEXT,
@@ -42,7 +43,8 @@ class DatabaseHelper {
       );
 
     ''');
-    await db.execute('''
+    await db.execute(
+        '''
       CREATE TABLE  $_tblWatchlistTv (
         id INTEGER PRIMARY KEY,
         name TEXT,
@@ -116,5 +118,12 @@ class DatabaseHelper {
     } else {
       return null;
     }
+  }
+
+  Future<List<Map<String, dynamic>>> getWatchlistTvs() async {
+    final db = await database;
+    final List<Map<String, dynamic>> results = await db!.query(_tblWatchlistTv);
+
+    return results;
   }
 }

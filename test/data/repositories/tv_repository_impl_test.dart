@@ -410,4 +410,17 @@ void main() {
       expect(result, false);
     });
   });
+
+  group('get watchlist tvs', () {
+    test('should return list of tvs', () async {
+      // arrange
+      when(mockTvLocalDataSource.getWatchlistTvs())
+          .thenAnswer((_) async => [testTvTable]);
+      // act
+      final result = await repository.getWatchlistTvs();
+      // assert
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, [testWatchlistTv]);
+    });
+  });
 }

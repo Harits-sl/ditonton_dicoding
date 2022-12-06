@@ -11,7 +11,7 @@ import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_tvs_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv_search_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
@@ -25,6 +25,7 @@ import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -74,6 +75,9 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<TopRatedTvsNotifier>(),
         ),
         ChangeNotifierProvider(
+          create: (_) => di.locator<WatchlistTvNotifier>(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => di.locator<TvDetailNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -120,8 +124,8 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (_) => SearchPage());
             case TvSearchPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => TvSearchPage());
-            case WatchlistMoviesPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
+            case WatchlistPage.ROUTE_NAME:
+              return MaterialPageRoute(builder: (_) => WatchlistPage());
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
             default:

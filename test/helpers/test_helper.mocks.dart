@@ -282,6 +282,12 @@ class MockDatabaseHelper extends _i1.Mock implements _i15.DatabaseHelper {
       (super.noSuchMethod(Invocation.method(#getTvById, [id]),
               returnValue: _i7.Future<Map<String, dynamic>?>.value())
           as _i7.Future<Map<String, dynamic>?>);
+  @override
+  _i7.Future<List<Map<String, dynamic>>> getWatchlistTvs() =>
+      (super.noSuchMethod(Invocation.method(#getWatchlistTvs, []),
+              returnValue: _i7.Future<List<Map<String, dynamic>>>.value(
+                  <Map<String, dynamic>>[]))
+          as _i7.Future<List<Map<String, dynamic>>>);
 }
 
 /// A class which mocks [TvRepository].
