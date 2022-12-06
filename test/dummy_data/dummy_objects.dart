@@ -3,6 +3,7 @@ import 'package:ditonton/data/models/tv_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 
@@ -91,6 +92,15 @@ final testTvDetail = TvDetail(
   name: 'name',
   voteAverage: 1,
   voteCount: 1,
+  seasons: [
+    Season(
+      episodeCount: 10,
+      id: 1,
+      name: 'name',
+      posterPath: 'posterPath',
+      seasonNumber: 10,
+    )
+  ],
 );
 
 final testWatchlistTv = Tv.watchlist(

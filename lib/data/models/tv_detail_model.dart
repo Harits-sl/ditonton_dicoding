@@ -1,3 +1,4 @@
+import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
@@ -62,7 +63,7 @@ class TvDetailResponse extends Equatable {
   final String posterPath;
   final List productionCompanies;
   final List productionCountries;
-  final List seasons;
+  final List<SeasonModel> seasons;
   final List spokenLanguages;
   final String status;
   final String tagline;
@@ -134,7 +135,8 @@ class TvDetailResponse extends Equatable {
         posterPath: json["poster_path"],
         productionCompanies: List.from(json["production_companies"]),
         productionCountries: List.from(json["production_countries"]),
-        seasons: List.from(json["seasons"]),
+        seasons: List<SeasonModel>.from(
+            json["seasons"].map((x) => SeasonModel.fromJson(x))),
         spokenLanguages: List.from(json["spoken_languages"]),
         status: json["status"],
         tagline: json["tagline"],
@@ -155,6 +157,7 @@ class TvDetailResponse extends Equatable {
         name: this.name,
         voteAverage: this.voteAverage,
         voteCount: this.voteCount,
+        seasons: this.seasons.map((season) => season.toEntity()).toList(),
       );
 
   @override
