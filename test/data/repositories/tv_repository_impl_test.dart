@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/data/models/tv_detail_model.dart';
 import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/repositories/tv_repository_impl.dart';
@@ -219,7 +220,17 @@ void main() {
       posterPath: 'posterPath',
       productionCompanies: [],
       productionCountries: ['productionCountries'],
-      seasons: [],
+      seasons: [
+        SeasonModel(
+          episodeCount: 10,
+          id: 1,
+          name: 'name',
+          posterPath: 'posterPath',
+          seasonNumber: 10,
+          airDate: '2020-1-1',
+          overview: 'overview',
+        )
+      ],
       spokenLanguages: [],
       status: 'status',
       tagline: 'tagline',
