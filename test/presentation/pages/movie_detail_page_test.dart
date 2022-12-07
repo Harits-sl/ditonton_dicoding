@@ -28,7 +28,7 @@ void main() {
     );
   }
 
-  testWidgets('should not display recommendation when state is empty',
+  testWidgets('should not display movie recommendation when state is empty',
       (WidgetTester tester) async {
     when(mockNotifier.movieState).thenReturn(RequestState.Loaded);
     when(mockNotifier.movie).thenReturn(testMovieDetail);
