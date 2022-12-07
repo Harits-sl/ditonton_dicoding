@@ -5,8 +5,13 @@ class HomeNotifier extends ChangeNotifier {
   BodyState _bodyState = BodyState.Movie;
   BodyState get bodyState => _bodyState;
 
-  void setBody(BodyState newValue) {
-    _bodyState = newValue;
+  void changeToMovie() {
+    _bodyState = BodyState.Movie;
+    notifyListeners();
+  }
+
+  void changeToTv() {
+    _bodyState = BodyState.Tv;
     notifyListeners();
   }
 }

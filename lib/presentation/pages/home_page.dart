@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
               title: Text('Movies'),
               onTap: () {
                 Provider.of<HomeNotifier>(context, listen: false)
-                    .setBody(BodyState.Movie);
+                    .changeToMovie();
                 Navigator.pop(context);
               },
             ),
@@ -38,8 +38,7 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.tv),
               title: Text('Tvs'),
               onTap: () {
-                Provider.of<HomeNotifier>(context, listen: false)
-                    .setBody(BodyState.Tv);
+                Provider.of<HomeNotifier>(context, listen: false).changeToTv();
                 Navigator.pop(context);
               },
             ),
