@@ -181,7 +181,7 @@ void main() {
       // arrange
       when(mockRemoveWatchlistTv.execute(testTvDetail))
           .thenAnswer((_) async => Right('Removed'));
-      when(mockGetWatchlistTvStatus.execute(testMovieDetail.id))
+      when(mockGetWatchlistTvStatus.execute(testTvDetail.id))
           .thenAnswer((_) async => false);
       // act
       await provider.removeFromWatchlist(testTvDetail);
@@ -193,12 +193,12 @@ void main() {
       // arrange
       when(mockSaveWatchlistTv.execute(testTvDetail))
           .thenAnswer((_) async => Right('Added to Watchlist'));
-      when(mockGetWatchlistTvStatus.execute(testMovieDetail.id))
+      when(mockGetWatchlistTvStatus.execute(testTvDetail.id))
           .thenAnswer((_) async => true);
       // act
       await provider.addWatchlist(testTvDetail);
       // assert
-      verify(mockGetWatchlistTvStatus.execute(testMovieDetail.id));
+      verify(mockGetWatchlistTvStatus.execute(testTvDetail.id));
       expect(provider.isAddedToWatchlist, true);
       expect(provider.watchlistMessage, 'Added to Watchlist');
       expect(listenerCallCount, 1);
@@ -208,7 +208,7 @@ void main() {
       // arrange
       when(mockSaveWatchlistTv.execute(testTvDetail))
           .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
-      when(mockGetWatchlistTvStatus.execute(testMovieDetail.id))
+      when(mockGetWatchlistTvStatus.execute(testTvDetail.id))
           .thenAnswer((_) async => false);
       // act
       await provider.addWatchlist(testTvDetail);
@@ -222,7 +222,7 @@ void main() {
       // arrange
       when(mockRemoveWatchlistTv.execute(testTvDetail))
           .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
-      when(mockGetWatchlistTvStatus.execute(testMovieDetail.id))
+      when(mockGetWatchlistTvStatus.execute(testTvDetail.id))
           .thenAnswer((_) async => false);
       // act
       await provider.removeFromWatchlist(testTvDetail);
