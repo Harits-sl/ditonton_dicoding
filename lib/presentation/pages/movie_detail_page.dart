@@ -237,7 +237,9 @@ class DetailContent extends StatelessWidget {
                                     ),
                                   );
                                 } else {
-                                  return Container();
+                                  return Container(
+                                    key: Key('empty recommendation'),
+                                  );
                                 }
                               },
                             ),

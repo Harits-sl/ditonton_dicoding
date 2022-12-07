@@ -28,6 +28,21 @@ void main() {
     );
   }
 
+  testWidgets('should not display recommendation when state is empty',
+      (WidgetTester tester) async {
+    when(mockNotifier.movieState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.movie).thenReturn(testMovieDetail);
+    when(mockNotifier.recommendationState).thenReturn(RequestState.Empty);
+    when(mockNotifier.movieRecommendations).thenReturn([]);
+    when(mockNotifier.isAddedToWatchlist).thenReturn(false);
+
+    final container = find.byKey(Key('empty recommendation'));
+
+    await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: 1)));
+
+    expect(container, findsOneWidget);
+  });
+
   testWidgets(
       'Watchlist button should display add icon when movie not added to watchlist',
       (WidgetTester tester) async {

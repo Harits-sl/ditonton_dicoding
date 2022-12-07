@@ -1,0 +1,1 @@
+enum BodyState { Movie, Tv }

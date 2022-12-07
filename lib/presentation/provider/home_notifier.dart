@@ -1,4 +1,4 @@
-import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/common/body_state_enum.dart';
 import 'package:flutter/material.dart';
 
 class HomeNotifier extends ChangeNotifier {
