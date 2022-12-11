@@ -56,7 +56,9 @@ class TvSearchPage extends StatelessWidget {
                   );
                 } else {
                   return Expanded(
-                    child: Container(),
+                    child: Container(
+                      key: Key('error'),
+                    ),
                   );
                 }
               },

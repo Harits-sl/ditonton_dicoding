@@ -69,10 +69,10 @@ void main() {
     when(mockNotifier.topRatedMoviesState).thenReturn(RequestState.Loaded);
     when(mockNotifier.topRatedMovies).thenReturn([testMovie]);
 
-    final listViewFinder = find.byType(CachedNetworkImage);
+    final imageFinder = find.byType(CachedNetworkImage);
 
     await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
 
-    expect(listViewFinder, findsWidgets);
+    expect(imageFinder, findsWidgets);
   });
 }

@@ -69,10 +69,10 @@ void main() {
     when(mockNotifier.topRatedState).thenReturn(RequestState.Loaded);
     when(mockNotifier.topRatedTvs).thenReturn([testTv]);
 
-    final listViewFinder = find.byType(CachedNetworkImage);
+    final imageFinder = find.byType(CachedNetworkImage);
 
     await tester.pumpWidget(_makeTestableWidget(HomeTvPage()));
 
-    expect(listViewFinder, findsWidgets);
+    expect(imageFinder, findsWidgets);
   });
 }
