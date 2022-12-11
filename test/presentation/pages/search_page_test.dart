@@ -63,15 +63,4 @@ void main() {
 
     expect(keyFinder, findsOneWidget);
   });
-
-  testWidgets('Page should display TextField', (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.searchResult).thenReturn(<Movie>[]);
-
-    final listViewFinder = find.byType(TextField);
-
-    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
-
-    expect(listViewFinder, findsOneWidget);
-  });
 }
