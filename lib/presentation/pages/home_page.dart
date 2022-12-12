@@ -26,6 +26,7 @@ class HomePage extends StatelessWidget {
               accountEmail: Text('ditonton@dicoding.com'),
             ),
             ListTile(
+              key: Key('drawer_movies'),
               leading: Icon(Icons.movie),
               title: Text('Movies'),
               onTap: () {
@@ -35,6 +36,7 @@ class HomePage extends StatelessWidget {
               },
             ),
             ListTile(
+              key: Key('drawer_tvs'),
               leading: Icon(Icons.tv),
               title: Text('Tvs'),
               onTap: () {

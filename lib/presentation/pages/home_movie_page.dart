@@ -31,6 +31,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
+        key: Key('scroll_view'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,7 +46,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state == RequestState.Loaded) {
-                return MovieList(data.nowPlayingMovies);
+                return MovieList(
+                  'now_playing_movies',
+                  data.nowPlayingMovies,
+                );
               } else {
                 return Text('Failed');
               }
@@ -62,7 +66,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state == RequestState.Loaded) {
-                return MovieList(data.popularMovies);
+                return MovieList(
+                  'popular_movies',
+                  data.popularMovies,
+                );
               } else {
                 return Text('Failed');
               }
@@ -79,7 +86,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state == RequestState.Loaded) {
-                return MovieList(data.topRatedMovies);
+                return MovieList(
+                  'top_rated_movies',
+                  data.topRatedMovies,
+                );
               } else {
                 return Text('Failed');
               }
@@ -92,19 +102,25 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
 }
 
 class MovieList extends StatelessWidget {
+  final String keyListView;
   final List<Movie> movies;
 
-  MovieList(this.movies);
+  MovieList(
+    this.keyListView,
+    this.movies,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 200,
       child: ListView.builder(
+        key: Key(keyListView),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final movie = movies[index];
           return Container(
+            key: Key('${keyListView}_$index'),
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
