@@ -36,7 +36,7 @@ void main() {
 
     await tester.pumpWidget(_makeTestableWidget(NowPlayingTvsPage()));
 
-    expect(centerFinder, findsOneWidget);
+    expect(centerFinder, findsWidgets);
     expect(progressBarFinder, findsOneWidget);
   });
 
