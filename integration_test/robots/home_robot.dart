@@ -12,15 +12,30 @@ class HomeRobot {
     expect(textFinder, findsOneWidget);
   }
 
-  Future<void> scrollListView(String finderKey, String listKey) async {
+  Future<void> scrollListView({
+    required String finderKey,
+    required String listKey,
+    bool isScrollVertical = false,
+  }) async {
+    final scrollHorizontal = Offset(-500, 0.0);
+    final scrollVertical = Offset(0.0, -500);
     final itemFinder = find.byKey(Key(finderKey));
     final listFinder = find.byKey(Key(listKey));
-    await tester.dragUntilVisible(
-      itemFinder,
-      listFinder,
-      const Offset(-500, 0.0),
-      duration: Duration(milliseconds: 500),
-    );
+    if (isScrollVertical) {
+      await tester.dragUntilVisible(
+        itemFinder,
+        listFinder,
+        scrollVertical,
+        duration: Duration(milliseconds: 500),
+      );
+    } else {
+      await tester.dragUntilVisible(
+        itemFinder,
+        listFinder,
+        scrollHorizontal,
+        duration: Duration(milliseconds: 500),
+      );
+    }
     await tester.pumpAndSettle();
     expect(listFinder, findsOneWidget);
   }
@@ -64,5 +79,19 @@ class HomeRobot {
     expect(topRatedFinder, findsOneWidget);
 
     await tester.pump();
+  }
+
+  Future<void> scrollToTop() async {
+    final scrollVertical = Offset(0.0, 500);
+    final itemFinder = find.byKey(Key('now_playing'));
+    final listFinder = find.byKey(Key('scroll_tv'));
+
+    await tester.dragUntilVisible(
+      itemFinder,
+      listFinder,
+      scrollVertical,
+      duration: Duration(milliseconds: 500),
+    );
+    await tester.pumpAndSettle();
   }
 }

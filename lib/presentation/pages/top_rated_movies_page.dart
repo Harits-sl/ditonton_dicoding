@@ -25,6 +25,13 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Top Rated Movies'),
+        leading: new IconButton(
+          key: Key('back_button'),
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -36,9 +43,10 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
               );
             } else if (data.state == RequestState.Loaded) {
               return ListView.builder(
+                key: Key('list_top_rated'),
                 itemBuilder: (context, index) {
                   final movie = data.movies[index];
-                  return MovieCard(movie);
+                  return MovieCard(movie, 'top_rated_$index');
                 },
                 itemCount: data.movies.length,
               );

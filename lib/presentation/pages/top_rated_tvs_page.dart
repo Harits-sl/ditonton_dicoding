@@ -26,6 +26,13 @@ class _TopRatedTvsPageState extends State<TopRatedTvsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Top Rated Tvs'),
+        leading: new IconButton(
+          key: Key('back_button'),
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -37,9 +44,10 @@ class _TopRatedTvsPageState extends State<TopRatedTvsPage> {
               );
             } else if (data.state == RequestState.Loaded) {
               return ListView.builder(
+                key: Key('list_top_rated'),
                 itemBuilder: (context, index) {
                   final tv = data.tvs[index];
-                  return TvCard(tv);
+                  return TvCard(tv, 'top_rated_$index');
                 },
                 itemCount: data.tvs.length,
               );

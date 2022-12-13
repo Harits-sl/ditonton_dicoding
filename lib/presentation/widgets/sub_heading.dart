@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 
 class SubHeading extends StatelessWidget {
   const SubHeading({
-    Key? key,
     required this.title,
     required this.onTap,
-  }) : super(key: key);
+    required this.buttonKey,
+  });
 
   final String title;
   final Function() onTap;
+  final String buttonKey;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class SubHeading extends StatelessWidget {
           style: kHeading6,
         ),
         InkWell(
+          key: Key(buttonKey),
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(8.0),

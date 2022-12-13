@@ -45,6 +45,13 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
     return Scaffold(
       appBar: AppBar(
         title: Text('Watchlist'),
+        leading: new IconButton(
+          key: Key('back_button'),
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -62,8 +69,8 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
                 itemBuilder: (context, index) {
                   final content = result[index];
                   return content is Movie
-                      ? MovieCard(content)
-                      : TvCard(content);
+                      ? MovieCard(content, 'watchlist_$index')
+                      : TvCard(content, 'watchlist_tv_$index');
                 },
                 itemCount: result.length,
               );

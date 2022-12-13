@@ -26,6 +26,13 @@ class _PopularTvsPageState extends State<PopularTvsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Popular Tvs'),
+        leading: new IconButton(
+          key: Key('back_button'),
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -37,9 +44,10 @@ class _PopularTvsPageState extends State<PopularTvsPage> {
               );
             } else if (data.state == RequestState.Loaded) {
               return ListView.builder(
+                key: Key('list_popular'),
                 itemBuilder: (context, index) {
                   final tv = data.tvs[index];
-                  return TvCard(tv);
+                  return TvCard(tv, 'popular_$index');
                 },
                 itemCount: data.tvs.length,
               );

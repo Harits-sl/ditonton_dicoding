@@ -26,6 +26,13 @@ class _NowPlayingTvsPageState extends State<NowPlayingTvsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Now Playing Tvs'),
+        leading: new IconButton(
+          key: Key('back_button'),
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -37,9 +44,10 @@ class _NowPlayingTvsPageState extends State<NowPlayingTvsPage> {
               );
             } else if (data.state == RequestState.Loaded) {
               return ListView.builder(
+                key: Key('list_now_playing'),
                 itemBuilder: (context, index) {
                   final tv = data.tvs[index];
-                  return TvCard(tv);
+                  return TvCard(tv, 'now_playing_$index');
                 },
                 itemCount: data.tvs.length,
               );

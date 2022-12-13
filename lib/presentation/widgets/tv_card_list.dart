@@ -6,14 +6,16 @@ import 'package:flutter/material.dart';
 
 class TvCard extends StatelessWidget {
   final Tv tv;
+  final String buttonKey;
 
-  TvCard(this.tv);
+  TvCard(this.tv, this.buttonKey);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
+        key: Key(buttonKey),
         onTap: () {
           Navigator.pushNamed(
             context,

@@ -40,6 +40,7 @@ class AboutPage extends StatelessWidget {
           ),
           SafeArea(
             child: IconButton(
+              key: Key('back_button'),
               onPressed: () => Navigator.pop(context),
               icon: Icon(Icons.arrow_back),
             ),

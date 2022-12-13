@@ -45,6 +45,7 @@ class HomePage extends StatelessWidget {
               },
             ),
             ListTile(
+              key: Key('drawer_watchlist'),
               leading: Icon(Icons.save_alt),
               title: Text('Watchlist'),
               onTap: () {
@@ -52,6 +53,7 @@ class HomePage extends StatelessWidget {
               },
             ),
             ListTile(
+              key: Key('drawer_about'),
               onTap: () {
                 Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
               },

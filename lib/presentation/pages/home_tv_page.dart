@@ -31,11 +31,13 @@ class _HomeTvPageState extends State<HomeTvPage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
+        key: Key('scroll_tv'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SubHeading(
               title: 'Now Playing Tvs',
+              buttonKey: 'now_playing',
               onTap: () =>
                   Navigator.pushNamed(context, NowPlayingTvsPage.ROUTE_NAME),
             ),
@@ -47,13 +49,14 @@ class _HomeTvPageState extends State<HomeTvPage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state == RequestState.Loaded) {
-                return TvList(data.nowPlayingTvs);
+                return TvList('now_playing_tvs', data.nowPlayingTvs);
               } else {
                 return Text('Failed');
               }
             }),
             SubHeading(
               title: 'Popular Tvs',
+              buttonKey: 'popular',
               onTap: () =>
                   Navigator.pushNamed(context, PopularTvsPage.ROUTE_NAME),
             ),
@@ -64,13 +67,14 @@ class _HomeTvPageState extends State<HomeTvPage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state == RequestState.Loaded) {
-                return TvList(data.popularTvs);
+                return TvList('popular_tvs', data.popularTvs);
               } else {
                 return Text('Failed');
               }
             }),
             SubHeading(
               title: 'Top Rated Tvs',
+              buttonKey: 'top_rated',
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedTvsPage.ROUTE_NAME),
             ),
@@ -81,7 +85,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state == RequestState.Loaded) {
-                return TvList(data.topRatedTvs);
+                return TvList('top_rated_tvs', data.topRatedTvs);
               } else {
                 return Text('Failed');
               }
@@ -94,21 +98,24 @@ class _HomeTvPageState extends State<HomeTvPage> {
 }
 
 class TvList extends StatelessWidget {
+  final String keyListView;
   final List<Tv> tvs;
 
-  TvList(this.tvs);
+  TvList(this.keyListView, this.tvs);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 200,
       child: ListView.builder(
+        key: Key(keyListView),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final tv = tvs[index];
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
+              key: Key('${keyListView}_$index'),
               onTap: () {
                 Navigator.pushNamed(
                   context,

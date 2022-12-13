@@ -56,6 +56,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             }),
             SubHeading(
               title: 'Popular',
+              buttonKey: 'popular',
               onTap: () =>
                   Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
             ),
@@ -76,6 +77,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             }),
             SubHeading(
               title: 'Top Rated',
+              buttonKey: 'top_rated',
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
             ),
@@ -120,9 +122,9 @@ class MovieList extends StatelessWidget {
         itemBuilder: (context, index) {
           final movie = movies[index];
           return Container(
-            key: Key('${keyListView}_$index'),
             padding: const EdgeInsets.all(8),
             child: InkWell(
+              key: Key('${keyListView}_$index'),
               onTap: () {
                 Navigator.pushNamed(
                   context,
