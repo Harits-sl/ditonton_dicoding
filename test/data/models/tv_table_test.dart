@@ -1,4 +1,3 @@
-import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/data/models/tv_table.dart';
 import 'package:flutter_test/flutter_test.dart';
 

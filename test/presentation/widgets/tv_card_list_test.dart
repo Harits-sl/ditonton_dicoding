@@ -16,7 +16,7 @@ void main() {
 
   testWidgets('All required widget should display',
       (WidgetTester tester) async {
-    await tester.pumpWidget(_makeTestableWidget(TvCard(testTv)));
+    await tester.pumpWidget(_makeTestableWidget(TvCard(testTv, 'button_key')));
 
     expect(find.text(testTv.name!), findsOneWidget);
     expect(find.text('- Tv Series -'), findsOneWidget);

@@ -1,7 +1,5 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/presentation/pages/now_playing_tvs_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
-import '../../dummy_data/dummy_objects.dart';
 import 'search_page_test.mocks.dart';
 
 @GenerateMocks([MovieSearchNotifier])

@@ -8,6 +8,7 @@ import 'robots/movie_detail_robot.dart';
 import 'robots/now_playing_tvs_robot.dart';
 import 'robots/popular_movies_robot.dart';
 import 'robots/popular_tvs_robot.dart';
+import 'robots/search_robot.dart';
 import 'robots/top_rated_movies_robot.dart';
 import 'robots/top_rated_tvs_robot.dart';
 import 'robots/tv_detail_robot.dart';
@@ -30,7 +31,8 @@ void main() {
       final topRatedTvsRobot = TopRatedTvsRobot(tester);
       final movieDetailRobot = MovieDetailRobot(tester);
       final tvDetailRobot = TvDetailRobot(tester);
-      final searchRobot = TvSearchRobot(tester);
+      final tvSearchRobot = TvSearchRobot(tester);
+      final searchRobot = SearchRobot(tester);
 
       // test list movie in home page
       await homeRobot.findTitle();
@@ -138,7 +140,7 @@ void main() {
       // test movie detail
       await homeRobot.addDelay(1000);
       await homeRobot.clickButton('now_playing_movie_1');
-      await homeRobot.addDelay(5000);
+      await movieDetailRobot.addDelay(5000);
       await movieDetailRobot.findImage();
       await movieDetailRobot.findRating();
       await movieDetailRobot.findOverview();
@@ -172,7 +174,7 @@ void main() {
       await homeRobot.openDrawer();
       await homeRobot.clickButton('drawer_tvs');
       await homeRobot.addDelay(5000);
-      await homeRobot.clickButton('popular_tv_1');
+      await homeRobot.clickButton('popular_tv_0');
       await homeRobot.addDelay(5000);
       await tvDetailRobot.findImage();
       await tvDetailRobot.findRating();
@@ -209,11 +211,40 @@ void main() {
       await homeRobot.findTextTvs();
       await homeRobot.findSearch();
       await homeRobot.clickButton('button_search');
+      await tvSearchRobot.findTitle();
+      await tvSearchRobot.findTextField();
+      await tvSearchRobot.findText();
+      await tvSearchRobot.back();
+      await homeRobot.findTextTvs();
+      await homeRobot.findSearch();
+      await homeRobot.clickButton('button_search');
+      await tvSearchRobot.findTitle();
+      await tvSearchRobot.findTextField();
+      await tvSearchRobot.findText();
+      await tvSearchRobot.insertText();
+      await tvSearchRobot.addDelay(5000);
+      await tvSearchRobot.findItemSearch();
+      await homeRobot.clickButton('search_0');
+      await tvDetailRobot.addDelay(5000);
+      await tvDetailRobot.findImage();
+      await tvDetailRobot.findRating();
+      await tvDetailRobot.findOverview();
+      await tvDetailRobot.findSeason();
+      await tvDetailRobot.findRecommendation();
+      await tvDetailRobot.back();
+      await tvSearchRobot.back();
+
+      // test search movie
+      await homeRobot.openDrawer();
+      await homeRobot.clickButton('drawer_movies');
+      await homeRobot.findTextMovies();
+      await homeRobot.findSearch();
+      await homeRobot.clickButton('button_search');
       await searchRobot.findTitle();
       await searchRobot.findTextField();
       await searchRobot.findText();
       await searchRobot.back();
-      await homeRobot.findTextTvs();
+      await homeRobot.findTextMovies();
       await homeRobot.findSearch();
       await homeRobot.clickButton('button_search');
       await searchRobot.findTitle();
@@ -223,12 +254,11 @@ void main() {
       await searchRobot.addDelay(5000);
       await searchRobot.findItemSearch();
       await homeRobot.clickButton('search_0');
-      await searchRobot.addDelay(5000);
-      await tvDetailRobot.findImage();
-      await tvDetailRobot.findRating();
-      await tvDetailRobot.findOverview();
-      await tvDetailRobot.findSeason();
-      await tvDetailRobot.findRecommendation();
+      await movieDetailRobot.addDelay(5000);
+      await movieDetailRobot.findImage();
+      await movieDetailRobot.findRating();
+      await movieDetailRobot.findOverview();
+      await movieDetailRobot.findRecommendation();
     });
   });
 }

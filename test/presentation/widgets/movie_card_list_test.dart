@@ -16,7 +16,8 @@ void main() {
 
   testWidgets('All required widget should display',
       (WidgetTester tester) async {
-    await tester.pumpWidget(_makeTestableWidget(MovieCard(testMovie)));
+    await tester
+        .pumpWidget(_makeTestableWidget(MovieCard(testMovie, 'button_key')));
 
     expect(find.text(testMovie.title!), findsOneWidget);
     expect(find.text('- Movie -'), findsOneWidget);
