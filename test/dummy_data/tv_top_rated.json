@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "poster_path": "/posterPath.jpg",
+      "popularity": 1.0,
+      "id": 1,
+      "backdrop_path": "/backdropPath.jpg",
+      "vote_average": 1.0,
+      "overview": "overview",
+      "first_air_date": "2016-08-28",
+      "origin_country": [
+        "GB"
+      ],
+      "genre_ids": [
+        1,
+        2,
+        3
+      ],
+      "original_language": "en",
+      "vote_count": 1,
+      "name": "Victoria",
+      "original_name": "Victoria"
+    }
+  ],
+  "total_results": 192,
+  "total_pages": 10
+}

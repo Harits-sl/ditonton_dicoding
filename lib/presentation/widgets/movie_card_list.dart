@@ -6,14 +6,16 @@ import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
+  final String buttonKey;
 
-  MovieCard(this.movie);
+  MovieCard(this.movie, this.buttonKey);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
+        key: Key(buttonKey),
         onTap: () {
           Navigator.pushNamed(
             context,
@@ -40,6 +42,7 @@ class MovieCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
+                    Text('- Movie -'),
                     SizedBox(height: 16),
                     Text(
                       movie.overview ?? '-',

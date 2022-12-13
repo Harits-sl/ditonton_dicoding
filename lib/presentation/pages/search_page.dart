@@ -13,6 +13,13 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Search'),
+        leading: new IconButton(
+          key: Key('back_button'),
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,14 +56,16 @@ class SearchPage extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
                         final movie = data.searchResult[index];
-                        return MovieCard(movie);
+                        return MovieCard(movie, 'search_$index');
                       },
                       itemCount: result.length,
                     ),
                   );
                 } else {
                   return Expanded(
-                    child: Container(),
+                    child: Container(
+                      key: Key('error'),
+                    ),
                   );
                 }
               },
