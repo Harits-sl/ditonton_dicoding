@@ -47,7 +47,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 );
               } else if (state == RequestState.Loaded) {
                 return MovieList(
-                  'now_playing_movies',
+                  'now_playing_movie',
                   data.nowPlayingMovies,
                 );
               } else {
@@ -68,7 +68,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 );
               } else if (state == RequestState.Loaded) {
                 return MovieList(
-                  'popular_movies',
+                  'popular_movie',
                   data.popularMovies,
                 );
               } else {
@@ -89,7 +89,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 );
               } else if (state == RequestState.Loaded) {
                 return MovieList(
-                  'top_rated_movies',
+                  'top_rated_movie',
                   data.topRatedMovies,
                 );
               } else {

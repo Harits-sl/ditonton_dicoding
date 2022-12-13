@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MovieDetailRobot {
-  MovieDetailRobot(this.tester);
+class TvDetailRobot {
+  TvDetailRobot(this.tester);
 
   final WidgetTester tester;
 
