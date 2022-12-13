@@ -50,7 +50,7 @@ void main() {
 
     await tester.pumpWidget(_makeTestableWidget(WatchlistPage()));
 
-    expect(centerFinder, findsOneWidget);
+    expect(centerFinder, findsWidgets);
     expect(progressBarFinder, findsWidgets);
   });
 

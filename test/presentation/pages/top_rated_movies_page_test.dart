@@ -36,7 +36,7 @@ void main() {
 
     await tester.pumpWidget(_makeTestableWidget(TopRatedMoviesPage()));
 
-    expect(centerFinder, findsOneWidget);
+    expect(centerFinder, findsWidgets);
     expect(progressFinder, findsOneWidget);
   });
 
