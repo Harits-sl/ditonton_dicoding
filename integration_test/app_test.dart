@@ -11,6 +11,7 @@ import 'robots/popular_tvs_robot.dart';
 import 'robots/top_rated_movies_robot.dart';
 import 'robots/top_rated_tvs_robot.dart';
 import 'robots/tv_detail_robot.dart';
+import 'robots/tv_search_robot.dart';
 import 'robots/watchlist_robot.dart';
 
 void main() {
@@ -29,6 +30,7 @@ void main() {
       final topRatedTvsRobot = TopRatedTvsRobot(tester);
       final movieDetailRobot = MovieDetailRobot(tester);
       final tvDetailRobot = TvDetailRobot(tester);
+      final searchRobot = TvSearchRobot(tester);
 
       // test list movie in home page
       await homeRobot.findTitle();
@@ -175,6 +177,7 @@ void main() {
       await tvDetailRobot.findImage();
       await tvDetailRobot.findRating();
       await tvDetailRobot.findOverview();
+      await tvDetailRobot.findSeason();
       await tvDetailRobot.findRecommendation();
       await tvDetailRobot.scrollToTop();
       await tvDetailRobot.findAddIcon();
@@ -198,11 +201,34 @@ void main() {
       await tvDetailRobot.findImage();
       await tvDetailRobot.findRating();
       await tvDetailRobot.findOverview();
+      await tvDetailRobot.findSeason();
       await tvDetailRobot.findRecommendation();
       await tvDetailRobot.back();
 
       // test search tv
       await homeRobot.findTextTvs();
+      await homeRobot.findSearch();
+      await homeRobot.clickButton('button_search');
+      await searchRobot.findTitle();
+      await searchRobot.findTextField();
+      await searchRobot.findText();
+      await searchRobot.back();
+      await homeRobot.findTextTvs();
+      await homeRobot.findSearch();
+      await homeRobot.clickButton('button_search');
+      await searchRobot.findTitle();
+      await searchRobot.findTextField();
+      await searchRobot.findText();
+      await searchRobot.insertText();
+      await searchRobot.addDelay(5000);
+      await searchRobot.findItemSearch();
+      await homeRobot.clickButton('search_0');
+      await searchRobot.addDelay(5000);
+      await tvDetailRobot.findImage();
+      await tvDetailRobot.findRating();
+      await tvDetailRobot.findOverview();
+      await tvDetailRobot.findSeason();
+      await tvDetailRobot.findRecommendation();
     });
   });
 }

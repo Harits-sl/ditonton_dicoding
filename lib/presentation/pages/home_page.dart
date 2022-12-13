@@ -67,6 +67,7 @@ class HomePage extends StatelessWidget {
         title: Text('Ditonton'),
         actions: [
           IconButton(
+            key: (Key('button_search')),
             onPressed: () {
               var bodyState =
                   Provider.of<HomeNotifier>(context, listen: false).bodyState;

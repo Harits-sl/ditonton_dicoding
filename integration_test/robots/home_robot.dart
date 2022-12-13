@@ -81,6 +81,11 @@ class HomeRobot {
     await tester.pump();
   }
 
+  Future<void> findSearch() async {
+    final iconFinder = find.byIcon(Icons.search);
+    expect(iconFinder, findsOneWidget);
+  }
+
   Future<void> scrollToTop() async {
     final scrollVertical = Offset(0.0, 500);
     final itemFinder = find.byKey(Key('now_playing'));

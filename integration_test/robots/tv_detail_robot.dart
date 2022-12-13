@@ -22,6 +22,11 @@ class TvDetailRobot {
     expect(textFinder, findsOneWidget);
   }
 
+  Future<void> findSeason() async {
+    final textFinder = find.text('Seasons');
+    expect(textFinder, findsOneWidget);
+  }
+
   Future<void> findRecommendation() async {
     final textFinder = find.text('Recommendations');
     expect(textFinder, findsOneWidget);

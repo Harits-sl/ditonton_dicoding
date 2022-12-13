@@ -13,6 +13,13 @@ class TvSearchPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Search'),
+        leading: new IconButton(
+          key: Key('back_button'),
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
