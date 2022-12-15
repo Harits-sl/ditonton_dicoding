@@ -11,6 +11,7 @@ class TvSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Search'),
         leading: new IconButton(
@@ -56,7 +57,7 @@ class TvSearchPage extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
                         final tv = data.searchResult[index];
-                        return TvCard(tv, 'search_$index');
+                        return TvCard(tv, 'search_');
                       },
                       itemCount: result.length,
                     ),
