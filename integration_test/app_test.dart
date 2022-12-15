@@ -49,6 +49,11 @@ void main() {
       );
       await homeRobot.addDelay(1000);
       await homeRobot.scrollListView(
+        finderKey: 'top_rated_movie_0',
+        listKey: 'scroll_view',
+        isScrollVertical: true,
+      );
+      await homeRobot.scrollListView(
         finderKey: 'top_rated_movie_5',
         listKey: 'top_rated_movie',
       );
@@ -80,6 +85,11 @@ void main() {
       await homeRobot.findTextMovies();
 
       // test see more top rated movie
+      await homeRobot.scrollListView(
+        finderKey: 'top_rated_movie_0',
+        listKey: 'scroll_view',
+        isScrollVertical: true,
+      );
       await homeRobot.clickButton('top_rated');
       await homeRobot.addDelay(5000);
       await topRatedMoviesRobot.scrollListView();
@@ -125,6 +135,11 @@ void main() {
       await homeRobot.findTextTvs();
 
       // test see more top rated tvs
+      await homeRobot.scrollListView(
+        finderKey: 'top_rated_tv_5',
+        listKey: 'scroll_tv',
+        isScrollVertical: true,
+      );
       await homeRobot.clickButton('top_rated');
       await homeRobot.addDelay(5000);
       await topRatedTvsRobot.scrollListView();
