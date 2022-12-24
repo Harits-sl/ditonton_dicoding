@@ -35,6 +35,8 @@ dependencies:
     path: core
   search:
     path: search
+  movie:
+    path: movie
   bloc: ^8.1.0
 
 dev_dependencies:
