@@ -8,7 +8,6 @@ import 'package:core/presentation/pages/popular_tvs_page.dart';
 import 'package:core/presentation/pages/top_rated_movies_page.dart';
 import 'package:core/presentation/pages/top_rated_tvs_page.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
-import 'package:core/presentation/pages/tv_search_page.dart';
 import 'package:core/presentation/pages/watchlist_page.dart';
 import 'package:core/presentation/provider/home_notifier.dart';
 import 'package:core/presentation/provider/movie_detail_notifier.dart';
@@ -20,7 +19,6 @@ import 'package:core/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:core/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:core/presentation/provider/tv_detail_notifier.dart';
 import 'package:core/presentation/provider/tv_list_notifier.dart';
-import 'package:core/presentation/provider/tv_search_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:ditonton/utils.dart';
@@ -77,11 +75,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<TvDetailNotifier>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSearchNotifier>(),
-        ),
         BlocProvider(
           create: (_) => di.locator<SearchBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SearchTvBloc>(),
         ),
       ],
       child: MaterialApp(

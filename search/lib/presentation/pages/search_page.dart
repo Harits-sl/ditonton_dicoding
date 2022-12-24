@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:core/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:search/presentation/bloc/search_bloc.dart';
+import 'package:search/presentation/bloc/movie/search_bloc.dart';
 
 class SearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search';

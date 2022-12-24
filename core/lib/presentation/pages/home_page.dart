@@ -1,6 +1,5 @@
 import 'package:core/presentation/pages/home_movie_page.dart';
 import 'package:core/presentation/pages/home_tv_page.dart';
-import 'package:core/presentation/pages/tv_search_page.dart';
 import 'package:core/presentation/pages/watchlist_page.dart';
 import 'package:core/presentation/provider/home_notifier.dart';
 import 'package:core/utils/body_state_enum.dart';
@@ -73,7 +72,7 @@ class HomePage extends StatelessWidget {
               if (bodyState == BodyState.Movie) {
                 Navigator.pushNamed(context, SEARCH_ROUTE);
               } else {
-                Navigator.pushNamed(context, TvSearchPage.ROUTE_NAME);
+                Navigator.pushNamed(context, SEARCH_TV_ROUTE);
               }
             },
             icon: Icon(Icons.search),

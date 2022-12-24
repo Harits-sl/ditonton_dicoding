@@ -25,7 +25,6 @@ import 'package:core/domain/usecases/remove_watchlist.dart';
 import 'package:core/domain/usecases/remove_watchlist_tv.dart';
 import 'package:core/domain/usecases/save_watchlist.dart';
 import 'package:core/domain/usecases/save_watchlist_tv.dart';
-import 'package:core/domain/usecases/search_tvs.dart';
 import 'package:core/presentation/provider/movie_detail_notifier.dart';
 import 'package:core/presentation/provider/movie_list_notifier.dart';
 import 'package:core/presentation/provider/now_playing_tvs_notifier.dart';
@@ -35,7 +34,6 @@ import 'package:core/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:core/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:core/presentation/provider/tv_detail_notifier.dart';
 import 'package:core/presentation/provider/tv_list_notifier.dart';
-import 'package:core/presentation/provider/tv_search_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:get_it/get_it.dart';
@@ -113,15 +111,15 @@ void init() {
       saveWatchlistTv: locator(),
     ),
   );
-  locator.registerFactory(
-    () => TvSearchNotifier(
-      searchTvs: locator(),
-    ),
-  );
 
   // bloc
   locator.registerFactory(
     () => SearchBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => SearchTvBloc(
       locator(),
     ),
   );
