@@ -2,18 +2,11 @@ import 'package:about/about.dart';
 import 'package:core/core.dart';
 import 'package:core/presentation/pages/home_page.dart';
 import 'package:core/presentation/pages/movie_detail_page.dart';
-import 'package:core/presentation/pages/now_playing_tvs_page.dart';
-import 'package:core/presentation/pages/popular_tvs_page.dart';
-import 'package:core/presentation/pages/top_rated_tvs_page.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/pages/watchlist_page.dart';
 import 'package:core/presentation/provider/home_notifier.dart';
 import 'package:core/presentation/provider/movie_detail_notifier.dart';
-import 'package:core/presentation/provider/now_playing_tvs_notifier.dart';
-import 'package:core/presentation/provider/popular_tvs_notifier.dart';
-import 'package:core/presentation/provider/top_rated_tvs_notifier.dart';
 import 'package:core/presentation/provider/tv_detail_notifier.dart';
-import 'package:core/presentation/provider/tv_list_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:ditonton/utils.dart';
@@ -24,6 +17,7 @@ import 'package:movie/movie.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:search/search.dart';
+import 'package:tv/tv.dart';
 
 void main() {
   di.init();
@@ -45,18 +39,6 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<WatchlistMovieNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<TvListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<NowPlayingTvsNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvsNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvsNotifier>(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -73,6 +55,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<SearchBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<NowPlayingTvsCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<PopularTvsCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedTvsCubit>(),
         ),
         BlocProvider(
           create: (_) => di.locator<SearchTvBloc>(),

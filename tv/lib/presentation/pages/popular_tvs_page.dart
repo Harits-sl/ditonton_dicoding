@@ -1,24 +1,22 @@
-import 'package:core/presentation/widgets/movie_card_list.dart';
+import 'package:core/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/presentation/bloc/popular_movies_cubit.dart';
+import 'package:tv/presentation/bloc/popular_tvs_cubit.dart';
 
-class PopularMoviesPage extends StatefulWidget {
-  // ignore: constant_identifier_names
-  static const ROUTE_NAME = '/popular-movie';
-
-  const PopularMoviesPage({super.key});
+class PopularTvsPage extends StatefulWidget {
+  static const String ROUTE_NAME = '/popular-tv';
 
   @override
-  _PopularMoviesPageState createState() => _PopularMoviesPageState();
+  _PopularTvsPageState createState() => _PopularTvsPageState();
 }
 
-class _PopularMoviesPageState extends State<PopularMoviesPage> {
+class _PopularTvsPageState extends State<PopularTvsPage> {
   @override
   void initState() {
     super.initState();
+
     Future.microtask(
-      () => context.read<PopularMoviesCubit>().fetchPopularMovies(),
+      () => context.read<PopularTvsCubit>().fetchPopularTvs(),
     );
   }
 
@@ -26,7 +24,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Popular Movies'),
+        title: const Text('Popular Tvs'),
         leading: IconButton(
           key: const Key('back_button'),
           icon: const Icon(Icons.arrow_back),
@@ -37,22 +35,22 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<PopularMoviesCubit, PopularMoviesState>(
+        child: BlocBuilder<PopularTvsCubit, PopularTvsState>(
           builder: (context, state) {
-            if (state is PopularMoviesLoading) {
+            if (state is PopularTvsLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is PopularMoviesHasData) {
+            } else if (state is PopularTvsHasData) {
               return ListView.builder(
                 key: const Key('list_popular'),
                 itemBuilder: (context, index) {
                   final movie = state.result[index];
-                  return MovieCard(movie, 'popular_$index');
+                  return TvCard(movie, 'popular_$index');
                 },
                 itemCount: state.result.length,
               );
-            } else if (state is PopularMoviesError) {
+            } else if (state is PopularTvsError) {
               return Center(
                 key: const Key('error_message'),
                 child: Text(state.message),

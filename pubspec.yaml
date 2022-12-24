@@ -37,6 +37,8 @@ dependencies:
     path: search
   movie:
     path: movie
+  tv:
+    path: tv
   bloc: ^8.1.0
 
 dev_dependencies:

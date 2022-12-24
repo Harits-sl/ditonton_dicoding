@@ -1,24 +1,24 @@
-import 'package:core/presentation/widgets/movie_card_list.dart';
+import 'package:core/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/presentation/bloc/popular_movies_cubit.dart';
+import 'package:tv/presentation/bloc/now_playing_tvs_cubit.dart';
 
-class PopularMoviesPage extends StatefulWidget {
-  // ignore: constant_identifier_names
-  static const ROUTE_NAME = '/popular-movie';
+class NowPlayingTvsPage extends StatefulWidget {
+  static const String ROUTE_NAME = '/now-playing-tv';
 
-  const PopularMoviesPage({super.key});
+  const NowPlayingTvsPage({super.key});
 
   @override
-  _PopularMoviesPageState createState() => _PopularMoviesPageState();
+  _NowPlayingTvsPageState createState() => _NowPlayingTvsPageState();
 }
 
-class _PopularMoviesPageState extends State<PopularMoviesPage> {
+class _NowPlayingTvsPageState extends State<NowPlayingTvsPage> {
   @override
   void initState() {
     super.initState();
+
     Future.microtask(
-      () => context.read<PopularMoviesCubit>().fetchPopularMovies(),
+      () => context.read<NowPlayingTvsCubit>().fetchNowPlayingTvs(),
     );
   }
 
@@ -26,7 +26,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Popular Movies'),
+        title: const Text('Now Playing Tvs'),
         leading: IconButton(
           key: const Key('back_button'),
           icon: const Icon(Icons.arrow_back),
@@ -37,22 +37,22 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<PopularMoviesCubit, PopularMoviesState>(
+        child: BlocBuilder<NowPlayingTvsCubit, NowPlayingTvsState>(
           builder: (context, state) {
-            if (state is PopularMoviesLoading) {
+            if (state is NowPlayingTvsLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is PopularMoviesHasData) {
+            } else if (state is NowPlayingTvsHasData) {
               return ListView.builder(
-                key: const Key('list_popular'),
+                key: const Key('list_now_playing'),
                 itemBuilder: (context, index) {
                   final movie = state.result[index];
-                  return MovieCard(movie, 'popular_$index');
+                  return TvCard(movie, 'now_playing_$index');
                 },
                 itemCount: state.result.length,
               );
-            } else if (state is PopularMoviesError) {
+            } else if (state is NowPlayingTvsError) {
               return Center(
                 key: const Key('error_message'),
                 child: Text(state.message),

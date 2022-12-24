@@ -1,26 +1,33 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
-import 'package:core/domain/entities/movie.dart';
-import 'package:core/presentation/pages/movie_detail_page.dart';
+import 'package:core/domain/entities/tv.dart';
+import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/widgets/sub_heading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/movie.dart';
+import 'package:tv/presentation/bloc/now_playing_tvs_cubit.dart';
+import 'package:tv/presentation/bloc/popular_tvs_cubit.dart';
+import 'package:tv/presentation/bloc/top_rated_tvs_cubit.dart';
+import 'package:tv/presentation/pages/now_playing_tvs_page.dart';
+import 'package:tv/presentation/pages/popular_tvs_page.dart';
+import 'package:tv/presentation/pages/top_rated_tvs_page.dart';
 
-class HomeMoviePage extends StatefulWidget {
+class HomeTvPage extends StatefulWidget {
+  const HomeTvPage({super.key});
+
   @override
-  _HomeMoviePageState createState() => _HomeMoviePageState();
+  _HomeTvPageState createState() => _HomeTvPageState();
 }
 
-class _HomeMoviePageState extends State<HomeMoviePage> {
+class _HomeTvPageState extends State<HomeTvPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(
       () {
-        context.read<NowPlayingMoviesCubit>().fetchNowPlayingMovies();
-        context.read<PopularMoviesCubit>().fetchPopularMovies();
-        context.read<TopRatedMoviesCubit>().fetchTopRatedMovies();
+        context.read<NowPlayingTvsCubit>().fetchNowPlayingTvs();
+        context.read<PopularTvsCubit>().fetchPopularTvs();
+        context.read<TopRatedTvsCubit>().fetchTopRatedTvs();
       },
     );
   }
@@ -30,26 +37,28 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
-        key: const Key('scroll_view'),
+        key: const Key('scroll_tv'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Now Playing',
-              style: kHeading6,
+            SubHeading(
+              title: 'Now Playing Tvs',
+              buttonKey: 'now_playing',
+              onTap: () =>
+                  Navigator.pushNamed(context, NowPlayingTvsPage.ROUTE_NAME),
             ),
-            BlocBuilder<NowPlayingMoviesCubit, NowPlayingMoviesState>(
+            BlocBuilder<NowPlayingTvsCubit, NowPlayingTvsState>(
               builder: (context, state) {
-                if (state is NowPlayingMoviesLoading) {
+                if (state is NowPlayingTvsLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is NowPlayingMoviesHasData) {
-                  return MovieList(
-                    'now_playing_movie',
+                } else if (state is NowPlayingTvsHasData) {
+                  return TvList(
+                    'now_playing_tv',
                     state.result,
                   );
-                } else if (state is NowPlayingMoviesError) {
+                } else if (state is NowPlayingTvsError) {
                   return const Text('Failed');
                 } else {
                   return const SizedBox();
@@ -57,23 +66,23 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               },
             ),
             SubHeading(
-              title: 'Popular',
+              title: 'Popular Tvs',
               buttonKey: 'popular',
               onTap: () =>
-                  Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+                  Navigator.pushNamed(context, PopularTvsPage.ROUTE_NAME),
             ),
-            BlocBuilder<PopularMoviesCubit, PopularMoviesState>(
+            BlocBuilder<PopularTvsCubit, PopularTvsState>(
               builder: (context, state) {
-                if (state is PopularMoviesLoading) {
+                if (state is PopularTvsLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is PopularMoviesHasData) {
-                  return MovieList(
-                    'popular_movie',
+                } else if (state is PopularTvsHasData) {
+                  return TvList(
+                    'popular_tv',
                     state.result,
                   );
-                } else if (state is PopularMoviesError) {
+                } else if (state is PopularTvsError) {
                   return const Text('Failed');
                 } else {
                   return const SizedBox();
@@ -81,23 +90,23 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               },
             ),
             SubHeading(
-              title: 'Top Rated',
+              title: 'Top Rated Tvs',
               buttonKey: 'top_rated',
               onTap: () =>
-                  Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+                  Navigator.pushNamed(context, TopRatedTvsPage.ROUTE_NAME),
             ),
-            BlocBuilder<TopRatedMoviesCubit, TopRatedMoviesState>(
+            BlocBuilder<TopRatedTvsCubit, TopRatedTvsState>(
               builder: (context, state) {
-                if (state is TopRatedMoviesLoading) {
+                if (state is TopRatedTvsLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is TopRatedMoviesHasData) {
-                  return MovieList(
-                    'top_rated_movie',
+                } else if (state is TopRatedTvsHasData) {
+                  return TvList(
+                    'top_rated_tv',
                     state.result,
                   );
-                } else if (state is TopRatedMoviesError) {
+                } else if (state is TopRatedTvsError) {
                   return const Text('Failed');
                 } else {
                   return const SizedBox();
@@ -111,21 +120,21 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   }
 }
 
-class MovieList extends StatelessWidget {
+class TvList extends StatelessWidget {
   final String keyListView;
-  final List<Movie> movies;
+  final List<Tv> tvs;
 
-  const MovieList(this.keyListView, this.movies, {super.key});
+  const TvList(this.keyListView, this.tvs, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         key: Key(keyListView),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          final movie = movies[index];
+          final tv = tvs[index];
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
@@ -133,24 +142,24 @@ class MovieList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  MovieDetailPage.ROUTE_NAME,
-                  arguments: movie.id,
+                  TvDetailPage.ROUTE_NAME,
+                  arguments: tv.id,
                 );
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  placeholder: (context, url) => Center(
+                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),
           );
         },
-        itemCount: movies.length,
+        itemCount: tvs.length,
       ),
     );
   }
