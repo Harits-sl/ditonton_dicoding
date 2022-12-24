@@ -6,6 +6,8 @@ import 'package:tv/presentation/bloc/popular_tvs_cubit.dart';
 class PopularTvsPage extends StatefulWidget {
   static const String ROUTE_NAME = '/popular-tv';
 
+  const PopularTvsPage({super.key});
+
   @override
   _PopularTvsPageState createState() => _PopularTvsPageState();
 }
