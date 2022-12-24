@@ -13,7 +13,7 @@ class PopularMoviesCubit extends Cubit<PopularMoviesState> {
 
   final GetPopularMovies getPopularMovies;
 
-  Future<void> fetchPopularMovies() async {
+  void fetchPopularMovies() async {
     emit(PopularMoviesLoading());
 
     final result = await getPopularMovies.execute();
