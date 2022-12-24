@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:bloc/bloc.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';

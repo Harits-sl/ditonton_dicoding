@@ -1,65 +1,72 @@
-// import 'package:core/utils/state_enum.dart';
-// import 'package:core/domain/entities/movie.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:search/presentation/bloc/search_bloc.dart';
-// import '../../../../search/lib/presentation/pages/search_page.dart';
-// import '../../../../search/lib/presentation/provider/movie_search_notifier.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mockito/annotations.dart';
-// import 'package:mockito/mockito.dart';
-// import 'package:provider/provider.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:core/domain/entities/movie.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:search/presentation/bloc/search_bloc.dart';
+import '../../../../search/lib/presentation/pages/search_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
-// import 'search_page_test.mocks.dart';
+class MockSearchBlocMovie extends MockBloc<SearchEvent, SearchState>
+    implements SearchBloc {}
 
-// @GenerateMocks([SearchBloc])
-// void main() {
-//   late MockSearchBloc mockBloc;
+class MockSearchEvent extends Fake implements SearchEvent {}
 
-//   setUp(() {
-//     mockBloc = MockSearchBloc();
-//   });
+class MockSearchState extends Fake implements SearchState {}
 
-//   Widget _makeTestableWidget(Widget body) {
-//     return BlocProvider<SearchBloc>.value(
-//       value: mockBloc,
-//       child: MaterialApp(
-//         home: body,
-//       ),
-//     );
-//   }
+void main() {
+  late MockSearchBlocMovie mockBloc;
 
-//   testWidgets('Page should display center progress bar when loading',
-//       (WidgetTester tester) async {
-//     when(mockBloc.state).thenReturn(SearchLoading());
+  setUpAll(() {
+    registerFallbackValue(MockSearchEvent());
+    registerFallbackValue(MockSearchState());
+  });
 
-//     final progressBarFinder = find.byType(CircularProgressIndicator);
+  setUp(() {
+    mockBloc = MockSearchBlocMovie();
+  });
 
-//     await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+  Widget _makeTestableWidget(Widget body) {
+    return BlocProvider<SearchBloc>.value(
+      value: mockBloc,
+      child: MaterialApp(
+        home: body,
+      ),
+    );
+  }
 
-//     expect(progressBarFinder, findsOneWidget);
-//   });
+  testWidgets('Page should display center progress bar when loading',
+      (WidgetTester tester) async {
+    when(() => mockBloc.state).thenReturn(SearchLoading());
+    debugPrint('mockBloc.state: ${mockBloc.state}');
 
-//   testWidgets('Page should display ListView when data is loaded',
-//       (WidgetTester tester) async {
-//     when(mockBloc.state).thenReturn(SearchLoading());
-//     when(mockBloc.searchResult).thenReturn(<Movie>[]);
+    // final progressBarFinder = find.byType(CircularProgressIndicator);
+    final progressBarFinder = find.byKey(Key('loading'));
 
-//     final listViewFinder = find.byType(ListView);
+    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
 
-//     await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+    expect(progressBarFinder, findsOneWidget);
+  });
 
-//     expect(listViewFinder, findsOneWidget);
-//   });
+  testWidgets('Page should display ListView when data is loaded',
+      (WidgetTester tester) async {
+    when(() => mockBloc.state).thenReturn(SearchHasData(<Movie>[]));
 
-//   testWidgets('Page should not display anything when error',
-//       (WidgetTester tester) async {
-//     when(mockBloc.state).thenReturn(RequestState.Error);
+    final listViewFinder = find.byType(ListView);
 
-//     final keyFinder = find.byKey(Key('error'));
+    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
 
-//     await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+    expect(listViewFinder, findsOneWidget);
+  });
 
-//     expect(keyFinder, findsOneWidget);
-//   });
-// }
+  testWidgets('Page should not display anything when error',
+      (WidgetTester tester) async {
+    when(() => mockBloc.state).thenReturn(SearchError('error'));
+
+    final keyFinder = find.byKey(Key('error'));
+
+    await tester.pumpWidget(_makeTestableWidget(SearchPage()));
+
+    expect(keyFinder, findsOneWidget);
+  });
+}

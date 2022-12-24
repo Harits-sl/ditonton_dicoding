@@ -63,11 +63,6 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-    ),
-  );
-  locator.registerFactory(
     () => PopularMoviesNotifier(
       locator(),
     ),
