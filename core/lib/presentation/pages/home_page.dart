@@ -1,10 +1,10 @@
+import 'package:core/presentation/bloc/home_bloc.dart';
 import 'package:core/presentation/pages/watchlist_page.dart';
-import 'package:core/presentation/provider/home_notifier.dart';
-import 'package:core/utils/body_state_enum.dart';
 import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 import 'package:tv/tv.dart';
 
 class HomePage extends StatelessWidget {
@@ -28,8 +28,7 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.movie),
               title: Text('Movies'),
               onTap: () {
-                Provider.of<HomeNotifier>(context, listen: false)
-                    .changeToMovie();
+                context.read<HomeBloc>().add(OnMoviesTapped());
                 Navigator.pop(context);
               },
             ),
@@ -38,7 +37,7 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.tv),
               title: Text('Tvs'),
               onTap: () {
-                Provider.of<HomeNotifier>(context, listen: false).changeToTv();
+                context.read<HomeBloc>().add(OnTvsTapped());
                 Navigator.pop(context);
               },
             ),
@@ -67,9 +66,8 @@ class HomePage extends StatelessWidget {
           IconButton(
             key: (Key('button_search')),
             onPressed: () {
-              var bodyState =
-                  Provider.of<HomeNotifier>(context, listen: false).bodyState;
-              if (bodyState == BodyState.Movie) {
+              var bodyState = context.read<HomeBloc>().state;
+              if (bodyState is HomeMovies) {
                 Navigator.pushNamed(context, SEARCH_ROUTE);
               } else {
                 Navigator.pushNamed(context, SEARCH_TV_ROUTE);
@@ -79,9 +77,9 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Consumer<HomeNotifier>(
-        builder: (context, data, _) {
-          if (data.bodyState == BodyState.Movie) {
+      body: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          if (state is HomeMovies) {
             return HomeMoviePage();
           } else {
             return HomeTvPage();

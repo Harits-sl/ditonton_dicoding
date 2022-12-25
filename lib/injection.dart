@@ -19,6 +19,7 @@ import 'package:core/domain/usecases/remove_watchlist.dart';
 import 'package:core/domain/usecases/remove_watchlist_tv.dart';
 import 'package:core/domain/usecases/save_watchlist.dart';
 import 'package:core/domain/usecases/save_watchlist_tv.dart';
+import 'package:core/presentation/bloc/home_bloc.dart';
 import 'package:core/presentation/provider/movie_detail_notifier.dart';
 import 'package:core/presentation/provider/tv_detail_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
@@ -63,6 +64,9 @@ void init() {
   );
 
   // bloc
+  locator.registerFactory(
+    () => HomeBloc(),
+  );
   locator.registerFactory(
     () => NowPlayingMoviesCubit(
       locator(),

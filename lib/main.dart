@@ -1,10 +1,10 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
+import 'package:core/presentation/bloc/home_bloc.dart';
 import 'package:core/presentation/pages/home_page.dart';
 import 'package:core/presentation/pages/movie_detail_page.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/pages/watchlist_page.dart';
-import 'package:core/presentation/provider/home_notifier.dart';
 import 'package:core/presentation/provider/movie_detail_notifier.dart';
 import 'package:core/presentation/provider/tv_detail_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
@@ -30,9 +30,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => HomeNotifier(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => di.locator<MovieDetailNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -43,6 +40,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvDetailNotifier>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<HomeBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<NowPlayingMoviesCubit>(),
