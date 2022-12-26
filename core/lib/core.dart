@@ -6,11 +6,15 @@ export 'styles/text_styles.dart';
 export 'utils/constants.dart';
 export 'utils/exception.dart';
 export 'utils/failure.dart';
-export 'utils/state_enum.dart';
 export 'utils/route_observer.dart';
+export 'utils/formatted_utils.dart';
 
 export 'presentation/pages/home_page.dart';
 export 'presentation/pages/watchlist_page.dart';
+
+export 'presentation/widgets/movie_card_list.dart';
+export 'presentation/widgets/sub_heading.dart';
+export 'presentation/widgets/tv_card_list.dart';
 
 export 'presentation/bloc/home_bloc.dart';
 export 'presentation/bloc/watchlist_movie_cubit.dart';

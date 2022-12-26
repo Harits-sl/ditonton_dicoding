@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
-import 'package:core/domain/entities/movie_detail.dart';
-import 'package:core/utils/formatted_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -10,13 +8,14 @@ import 'package:movie/presentation/bloc/movie_detail_cubit.dart';
 import 'package:movie/presentation/bloc/movie_recommendation_cubit.dart';
 
 class MovieDetailPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const ROUTE_NAME = '/detail';
 
   final int id;
   const MovieDetailPage({super.key, required this.id});
 
   @override
-  _MovieDetailPageState createState() => _MovieDetailPageState();
+  State<MovieDetailPage> createState() => _MovieDetailPageState();
 }
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
@@ -72,7 +71,7 @@ class DetailContent extends StatefulWidget {
   final MovieDetail movie;
   final bool isAddedWatchlist;
 
-  DetailContent(this.movie, this.isAddedWatchlist, {super.key});
+  const DetailContent(this.movie, this.isAddedWatchlist, {super.key});
 
   @override
   State<DetailContent> createState() => _DetailContentState();

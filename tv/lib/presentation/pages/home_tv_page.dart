@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
-import 'package:core/domain/entities/tv.dart';
-import 'package:core/presentation/widgets/sub_heading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/presentation/bloc/now_playing_tvs_cubit.dart';
@@ -16,7 +14,7 @@ class HomeTvPage extends StatefulWidget {
   const HomeTvPage({super.key});
 
   @override
-  _HomeTvPageState createState() => _HomeTvPageState();
+  State<HomeTvPage> createState() => _HomeTvPageState();
 }
 
 class _HomeTvPageState extends State<HomeTvPage> {

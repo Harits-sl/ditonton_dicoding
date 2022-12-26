@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/presentation/bloc/popular_tvs_cubit.dart';
 
 class PopularTvsPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const String ROUTE_NAME = '/popular-tv';
 
   const PopularTvsPage({super.key});
 
   @override
-  _PopularTvsPageState createState() => _PopularTvsPageState();
+  State<PopularTvsPage> createState() => _PopularTvsPageState();
 }
 
 class _PopularTvsPageState extends State<PopularTvsPage> {

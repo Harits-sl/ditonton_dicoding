@@ -1,8 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
-import 'package:core/domain/entities/season.dart';
-import 'package:core/domain/entities/tv_detail.dart';
-import 'package:core/utils/formatted_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -11,10 +8,11 @@ import 'package:tv/presentation/bloc/tv_recommendation_cubit.dart';
 import 'package:tv/presentation/bloc/tv_watchlist_bloc.dart';
 
 class TvDetailPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const ROUTE_NAME = '/detail-tv';
 
   final int id;
-  TvDetailPage({required this.id});
+  const TvDetailPage({super.key, required this.id});
 
   @override
   State<TvDetailPage> createState() => _TvDetailPageState();
@@ -71,7 +69,7 @@ class DetailContent extends StatefulWidget {
   final TvDetail tv;
   final bool isAddedWatchlist;
 
-  DetailContent(this.tv, this.isAddedWatchlist);
+  const DetailContent(this.tv, this.isAddedWatchlist, {super.key});
 
   @override
   State<DetailContent> createState() => _DetailContentState();
@@ -337,7 +335,7 @@ class _DetailContentState extends State<DetailContent> {
 }
 
 class CardSeason extends StatelessWidget {
-  CardSeason(this.season);
+  const CardSeason(this.season, {super.key});
 
   final Season season;
 
@@ -355,13 +353,14 @@ class CardSeason extends StatelessWidget {
                 ? CachedNetworkImage(
                     imageUrl:
                         'https://image.tmdb.org/t/p/w500${season.posterPath}',
-                    placeholder: (context, url) => Container(
+                    placeholder: (context, url) => const SizedBox(
                       width: 95,
-                      child: const Center(
+                      child: Center(
                         child: CircularProgressIndicator(),
                       ),
                     ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   )
                 : Container(
                     color: kDavysGrey,

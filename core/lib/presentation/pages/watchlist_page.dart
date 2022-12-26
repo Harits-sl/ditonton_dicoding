@@ -1,13 +1,11 @@
 import 'package:core/presentation/bloc/watchlist_movie_cubit.dart';
 import 'package:core/presentation/bloc/watchlist_tv_cubit.dart';
 import 'package:core/utils/route_observer.dart';
-import 'package:core/utils/state_enum.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/presentation/widgets/movie_card_list.dart';
 import 'package:core/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class WatchlistPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist';

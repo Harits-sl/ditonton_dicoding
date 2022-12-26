@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/presentation/bloc/top_rated_tvs_cubit.dart';
 
 class TopRatedTvsPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const String ROUTE_NAME = '/top-rated-tv';
 
   const TopRatedTvsPage({super.key});
 
   @override
-  _TopRatedTvsPageState createState() => _TopRatedTvsPageState();
+  State<TopRatedTvsPage> createState() => _TopRatedTvsPageState();
 }
 
 class _TopRatedTvsPageState extends State<TopRatedTvsPage> {

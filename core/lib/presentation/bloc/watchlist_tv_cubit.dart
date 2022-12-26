@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:core/core.dart';
 import 'package:core/domain/entities/tv.dart';
+import 'package:core/domain/usecases/get_watchlist_tvs.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 

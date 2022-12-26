@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv/presentation/bloc/now_playing_tvs_cubit.dart';
 
 class NowPlayingTvsPage extends StatefulWidget {
+  // ignore: constant_identifier_names
   static const String ROUTE_NAME = '/now-playing-tv';
 
   const NowPlayingTvsPage({super.key});
 
   @override
-  _NowPlayingTvsPageState createState() => _NowPlayingTvsPageState();
+  State<NowPlayingTvsPage> createState() => _NowPlayingTvsPageState();
 }
 
 class _NowPlayingTvsPageState extends State<NowPlayingTvsPage> {

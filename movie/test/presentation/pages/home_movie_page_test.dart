@@ -71,7 +71,7 @@ void main() {
     final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+    await tester.pumpWidget(_makeTestableWidget(const HomeMoviePage()));
 
     expect(centerFinder, findsWidgets);
     expect(progressBarFinder, findsWidgets);
@@ -88,7 +88,7 @@ void main() {
 
     final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+    await tester.pumpWidget(_makeTestableWidget(const HomeMoviePage()));
 
     expect(listViewFinder, findsWidgets);
   });
@@ -104,7 +104,7 @@ void main() {
 
     final imageFinder = find.byType(CachedNetworkImage);
 
-    await tester.pumpWidget(_makeTestableWidget(HomeMoviePage()));
+    await tester.pumpWidget(_makeTestableWidget(const HomeMoviePage()));
 
     expect(imageFinder, findsWidgets);
   });
