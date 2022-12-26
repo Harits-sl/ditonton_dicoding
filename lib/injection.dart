@@ -20,7 +20,6 @@ import 'package:core/domain/usecases/remove_watchlist_tv.dart';
 import 'package:core/domain/usecases/save_watchlist.dart';
 import 'package:core/domain/usecases/save_watchlist_tv.dart';
 import 'package:core/presentation/bloc/home_bloc.dart';
-import 'package:core/presentation/provider/movie_detail_notifier.dart';
 import 'package:core/presentation/provider/tv_detail_notifier.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
@@ -34,15 +33,6 @@ final locator = GetIt.instance;
 
 void init() {
   // provider
-  locator.registerFactory(
-    () => MovieDetailNotifier(
-      getMovieDetail: locator(),
-      getMovieRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
-    ),
-  );
   locator.registerFactory(
     () => WatchlistMovieNotifier(
       getWatchlistMovies: locator(),
@@ -80,6 +70,23 @@ void init() {
   locator.registerFactory(
     () => TopRatedMoviesCubit(
       locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieDetailCubit(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => MovieRecommendationCubit(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => WatchlistBloc(
+      saveWatchlist: locator(),
+      removeWatchlist: locator(),
+      getWatchListStatus: locator(),
     ),
   );
   locator.registerFactory(

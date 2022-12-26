@@ -53,7 +53,7 @@ void main() {
       PopularMoviesLoading(),
       PopularMoviesHasData(tMovieList),
     ],
-    verify: (bloc) {
+    verify: (cubit) {
       verify(mockGetPopularMovies.execute());
     },
   );
@@ -70,7 +70,7 @@ void main() {
       PopularMoviesLoading(),
       const PopularMoviesError('Server Failure'),
     ],
-    verify: (bloc) {
+    verify: (cubit) {
       verify(mockGetPopularMovies.execute());
     },
   );
