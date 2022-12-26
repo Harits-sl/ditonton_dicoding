@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/tv.dart';
-import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/widgets/sub_heading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,7 @@ import 'package:tv/presentation/bloc/top_rated_tvs_cubit.dart';
 import 'package:tv/presentation/pages/now_playing_tvs_page.dart';
 import 'package:tv/presentation/pages/popular_tvs_page.dart';
 import 'package:tv/presentation/pages/top_rated_tvs_page.dart';
+import 'package:tv/presentation/pages/tv_detail_page.dart';
 
 class HomeTvPage extends StatefulWidget {
   const HomeTvPage({super.key});

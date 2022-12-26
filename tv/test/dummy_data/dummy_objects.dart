@@ -1,4 +1,7 @@
+import 'package:core/domain/entities/genre.dart';
+import 'package:core/domain/entities/season.dart';
 import 'package:core/domain/entities/tv.dart';
+import 'package:core/domain/entities/tv_detail.dart';
 
 final testTv = Tv(
   posterPath: '/jeGtaMwGxPmQN5xM4ClnwPQcNQz.jpg',
@@ -13,4 +16,27 @@ final testTv = Tv(
   voteCount: 686,
   name: 'Wednesdayy',
   originalName: 'Wednesdayy',
+);
+
+final testTvDetail = TvDetail(
+  backdropPath: 'backdropPath',
+  genres: [Genre(id: 1, name: 'Action')],
+  id: 1,
+  episodeRunTime: [10],
+  originalName: 'originalName',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  firstAirDate: '2020-1-1',
+  name: 'name',
+  voteAverage: 1,
+  voteCount: 1,
+  seasons: [
+    Season(
+      episodeCount: 10,
+      id: 1,
+      name: 'name',
+      posterPath: 'posterPath',
+      seasonNumber: 10,
+    )
+  ],
 );
