@@ -19,15 +19,6 @@ void init() {
       getWatchlistTvs: locator(),
     ),
   );
-  locator.registerFactory(
-    () => TvDetailNotifier(
-      getTvDetail: locator(),
-      getTvRecommendations: locator(),
-      getWatchlistTvStatus: locator(),
-      removeWatchlistTv: locator(),
-      saveWatchlistTv: locator(),
-    ),
-  );
 
   // bloc
   locator.registerFactory(
@@ -83,6 +74,23 @@ void init() {
   locator.registerFactory(
     () => TopRatedTvsCubit(
       locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TvDetailCubit(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TvRecommendationCubit(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TvWatchlistBloc(
+      saveWatchlistTv: locator(),
+      removeWatchlistTv: locator(),
+      getWatchlistTvStatus: locator(),
     ),
   );
   locator.registerFactory(

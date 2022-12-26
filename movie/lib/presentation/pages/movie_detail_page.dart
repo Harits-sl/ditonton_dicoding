@@ -25,6 +25,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     super.initState();
     Future.microtask(() {
       context.read<MovieDetailCubit>().fetchMovieDetail(widget.id);
+      context
+          .read<MovieRecommendationCubit>()
+          .fetchMovieRecommendation(widget.id);
       context.read<WatchlistBloc>().add(LoadWatchlistStatus(widget.id));
     });
   }
@@ -276,7 +279,7 @@ class _DetailContentState extends State<DetailContent> {
                                   );
                                 }
                               },
-                            )
+                            ),
                           ],
                         ),
                       ),

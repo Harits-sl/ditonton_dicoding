@@ -1,6 +1,5 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
-import 'package:core/presentation/pages/tv_detail_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,9 +25,6 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvDetailNotifier>(),
         ),
         BlocProvider(
           create: (_) => di.locator<HomeBloc>(),
@@ -62,6 +58,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<TopRatedTvsCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvDetailCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvRecommendationCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvWatchlistBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<SearchTvBloc>(),
