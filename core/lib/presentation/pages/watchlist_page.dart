@@ -1,3 +1,4 @@
+import 'package:core/utils/route_observer.dart';
 import 'package:core/utils/state_enum.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
@@ -15,8 +16,6 @@ class WatchlistPage extends StatefulWidget {
 }
 
 class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
-  final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
-
   @override
   void initState() {
     super.initState();

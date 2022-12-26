@@ -7,16 +7,16 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie/movie.dart';
 
-import 'top_rated_movies_bloc_test.mocks.dart';
+import 'popular_movies_cubit_test.mocks.dart';
 
-@GenerateMocks([GetTopRatedMovies])
+@GenerateMocks([GetPopularMovies])
 void main() {
-  late TopRatedMoviesCubit topRatedMoviesCubit;
-  late MockGetTopRatedMovies mockGetTopRatedMovies;
+  late PopularMoviesCubit popularMoviesCubit;
+  late MockGetPopularMovies mockGetPopularMovies;
 
   setUp(() {
-    mockGetTopRatedMovies = MockGetTopRatedMovies();
-    topRatedMoviesCubit = TopRatedMoviesCubit(mockGetTopRatedMovies);
+    mockGetPopularMovies = MockGetPopularMovies();
+    popularMoviesCubit = PopularMoviesCubit(mockGetPopularMovies);
   });
 
   final tMovieModel = Movie(
@@ -38,40 +38,40 @@ void main() {
   final tMovieList = <Movie>[tMovieModel];
 
   test('initial state should be empty', () {
-    expect(topRatedMoviesCubit.state, TopRatedMoviesInitial());
+    expect(popularMoviesCubit.state, PopularMoviesInitial());
   });
 
-  blocTest<TopRatedMoviesCubit, TopRatedMoviesState>(
+  blocTest<PopularMoviesCubit, PopularMoviesState>(
     'Should emit [Loading, HasData] when data is gotten successfully',
     build: () {
-      when(mockGetTopRatedMovies.execute())
+      when(mockGetPopularMovies.execute())
           .thenAnswer((_) async => Right(tMovieList));
-      return topRatedMoviesCubit;
+      return popularMoviesCubit;
     },
-    act: (cubit) => cubit.fetchTopRatedMovies(),
+    act: (cubit) => cubit.fetchPopularMovies(),
     expect: () => [
-      TopRatedMoviesLoading(),
-      TopRatedMoviesHasData(tMovieList),
+      PopularMoviesLoading(),
+      PopularMoviesHasData(tMovieList),
     ],
-    verify: (bloc) {
-      verify(mockGetTopRatedMovies.execute());
+    verify: (cubit) {
+      verify(mockGetPopularMovies.execute());
     },
   );
 
-  blocTest<TopRatedMoviesCubit, TopRatedMoviesState>(
+  blocTest<PopularMoviesCubit, PopularMoviesState>(
     'Should emit [Loading, Error] when get search is unsuccessful',
     build: () {
-      when(mockGetTopRatedMovies.execute())
+      when(mockGetPopularMovies.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-      return topRatedMoviesCubit;
+      return popularMoviesCubit;
     },
-    act: (cubit) => cubit.fetchTopRatedMovies(),
+    act: (cubit) => cubit.fetchPopularMovies(),
     expect: () => [
-      TopRatedMoviesLoading(),
-      const TopRatedMoviesError('Server Failure'),
+      PopularMoviesLoading(),
+      const PopularMoviesError('Server Failure'),
     ],
-    verify: (bloc) {
-      verify(mockGetTopRatedMovies.execute());
+    verify: (cubit) {
+      verify(mockGetPopularMovies.execute());
     },
   );
 }

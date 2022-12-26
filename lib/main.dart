@@ -1,13 +1,6 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
-import 'package:core/presentation/bloc/home_bloc.dart';
-import 'package:core/presentation/pages/home_page.dart';
 import 'package:core/presentation/pages/tv_detail_page.dart';
-import 'package:core/presentation/pages/watchlist_page.dart';
-import 'package:core/presentation/provider/tv_detail_notifier.dart';
-import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:core/presentation/provider/watchlist_tv_notifier.dart';
-import 'package:ditonton/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -137,9 +137,21 @@ class _DetailContentState extends State<DetailContent> {
                                       OnButtonRemoveWatchlistTapped(
                                           widget.movie));
                                 }
-                                String message = !_isAddedWatchlist
-                                    ? ADDED_MESSAGE_WATCHLIST
-                                    : REMOVED_MESSAGE_WATCHLIST;
+                                var state = context.read<WatchlistBloc>().state;
+                                String message = '';
+
+                                if (state is WatchlistStatus) {
+                                  final isAdded = state.isAddedToWatchlist;
+                                  message = !isAdded
+                                      ? ADDED_MESSAGE_WATCHLIST
+                                      : REMOVED_MESSAGE_WATCHLIST;
+                                } else if (state is WatchlistError) {
+                                  message = state.message;
+                                } else {
+                                  message = !_isAddedWatchlist
+                                      ? ADDED_MESSAGE_WATCHLIST
+                                      : REMOVED_MESSAGE_WATCHLIST;
+                                }
 
                                 if (message == ADDED_MESSAGE_WATCHLIST ||
                                     message == REMOVED_MESSAGE_WATCHLIST) {
@@ -213,7 +225,8 @@ class _DetailContentState extends State<DetailContent> {
                                 } else if (state is MovieRecommendationError) {
                                   return Text(state.message);
                                 } else if (state
-                                    is MovieRecommendationHasData) {
+                                        is MovieRecommendationHasData &&
+                                    state.movies.isNotEmpty) {
                                   return SizedBox(
                                     height: 150,
                                     child: ListView.builder(

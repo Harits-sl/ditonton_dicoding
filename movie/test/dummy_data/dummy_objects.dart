@@ -1,4 +1,6 @@
+import 'package:core/domain/entities/genre.dart';
 import 'package:core/domain/entities/movie.dart';
+import 'package:core/domain/entities/movie_detail.dart';
 
 final testMovie = Movie(
   adult: false,
@@ -15,4 +17,19 @@ final testMovie = Movie(
   video: false,
   voteAverage: 7.2,
   voteCount: 13507,
+);
+
+final testMovieDetail = MovieDetail(
+  adult: false,
+  backdropPath: 'backdropPath',
+  genres: [Genre(id: 1, name: 'Action')],
+  id: 1,
+  originalTitle: 'originalTitle',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  releaseDate: 'releaseDate',
+  runtime: 120,
+  title: 'title',
+  voteAverage: 1,
+  voteCount: 1,
 );
