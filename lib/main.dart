@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
-import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:search/search.dart';
 import 'package:tv/tv.dart';
@@ -18,14 +17,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistTvNotifier>(),
-        ),
         BlocProvider(
           create: (_) => di.locator<HomeBloc>(),
         ),
@@ -48,6 +41,9 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<WatchlistBloc>(),
         ),
         BlocProvider(
+          create: (_) => di.locator<WatchlistMovieCubit>(),
+        ),
+        BlocProvider(
           create: (_) => di.locator<SearchBloc>(),
         ),
         BlocProvider(
@@ -67,6 +63,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<TvWatchlistBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistTvCubit>(),
         ),
         BlocProvider(
           create: (_) => di.locator<SearchTvBloc>(),

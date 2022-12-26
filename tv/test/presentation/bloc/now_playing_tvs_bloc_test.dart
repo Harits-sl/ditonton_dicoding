@@ -57,7 +57,7 @@ void main() {
   );
 
   blocTest<NowPlayingTvsCubit, NowPlayingTvsState>(
-    'Should emit [Loading, Error] when get search is unsuccessful',
+    'Should emit [Loading, Error] when get data is unsuccessful',
     build: () {
       when(mockGetNowPlayingTvs.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));

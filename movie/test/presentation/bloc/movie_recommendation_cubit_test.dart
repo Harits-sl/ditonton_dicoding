@@ -61,7 +61,7 @@ void main() {
   );
 
   blocTest<MovieRecommendationCubit, MovieRecommendationState>(
-    'Should emit [Loading, Error] when get search is unsuccessful',
+    'Should emit [Loading, Error] when get data is unsuccessful',
     build: () {
       when(mockGetMovieRecommendations.execute(tId))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));

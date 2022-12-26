@@ -59,7 +59,7 @@ void main() {
   );
 
   blocTest<NowPlayingMoviesCubit, NowPlayingMoviesState>(
-    'Should emit [Loading, Error] when get search is unsuccessful',
+    'Should emit [Loading, Error] when get data is unsuccessful',
     build: () {
       when(mockGetNowPlayingMovies.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));

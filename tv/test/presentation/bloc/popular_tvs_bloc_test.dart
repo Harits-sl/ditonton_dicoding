@@ -56,7 +56,7 @@ void main() {
   );
 
   blocTest<PopularTvsCubit, PopularTvsState>(
-    'Should emit [Loading, Error] when get search is unsuccessful',
+    'Should emit [Loading, Error] when get data is unsuccessful',
     build: () {
       when(mockGetPopularTvs.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));

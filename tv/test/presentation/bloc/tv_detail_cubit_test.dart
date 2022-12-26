@@ -43,7 +43,7 @@ void main() {
   );
 
   blocTest<TvDetailCubit, TvDetailState>(
-    'Should emit [Loading, Error] when get search is unsuccessful',
+    'Should emit [Loading, Error] when get data is unsuccessful',
     build: () {
       when(mockGetTvDetail.execute(tId))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));

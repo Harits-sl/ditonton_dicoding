@@ -8,18 +8,6 @@ import 'package:tv/tv.dart';
 final locator = GetIt.instance;
 
 void init() {
-  // provider
-  locator.registerFactory(
-    () => WatchlistMovieNotifier(
-      getWatchlistMovies: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => WatchlistTvNotifier(
-      getWatchlistTvs: locator(),
-    ),
-  );
-
   // bloc
   locator.registerFactory(
     () => HomeBloc(),
@@ -54,6 +42,11 @@ void init() {
       saveWatchlist: locator(),
       removeWatchlist: locator(),
       getWatchListStatus: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => WatchlistMovieCubit(
+      locator(),
     ),
   );
   locator.registerFactory(
@@ -95,6 +88,11 @@ void init() {
   );
   locator.registerFactory(
     () => SearchTvBloc(
+      locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => WatchlistTvCubit(
       locator(),
     ),
   );
