@@ -1,16 +1,22 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
+import 'package:ditonton/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
-import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:search/search.dart';
 import 'package:tv/tv.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   di.init();
+  await HttpSSLPinning.init();
   runApp(MyApp());
 }
 

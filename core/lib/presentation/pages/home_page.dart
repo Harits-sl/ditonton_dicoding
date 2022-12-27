@@ -4,8 +4,7 @@ import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
-// import 'package:provider/provider.dart';
-import 'package:tv/tv.dart';
+import 'package:tv/presentation/pages/home_tv_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

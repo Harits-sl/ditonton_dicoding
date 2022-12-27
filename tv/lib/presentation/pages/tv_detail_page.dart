@@ -255,8 +255,8 @@ class _DetailContentState extends State<DetailContent> {
                                         return Padding(
                                           padding: const EdgeInsets.all(4.0),
                                           child: InkWell(
-                                            key: Key(
-                                                'recommendation_movie_$index'),
+                                            key:
+                                                Key('recommendation_tv_$index'),
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,

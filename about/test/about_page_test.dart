@@ -5,9 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   Widget _makeTestableWidget(Widget body) {
     return MaterialApp(
-      home: Scaffold(
-        body: body,
-      ),
+      home: body,
     );
   }
 

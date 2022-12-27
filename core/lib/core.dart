@@ -8,6 +8,7 @@ export 'utils/exception.dart';
 export 'utils/failure.dart';
 export 'utils/route_observer.dart';
 export 'utils/formatted_utils.dart';
+export 'utils/http_ssl_pinning.dart';
 
 export 'presentation/pages/home_page.dart';
 export 'presentation/pages/watchlist_page.dart';
