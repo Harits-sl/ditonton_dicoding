@@ -1,10 +1,13 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:core/core.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:movie/movie.dart';
+
+import '../../dummy_data/dummy_objects.dart';
 
 class MockPopularMoviesCubit extends MockCubit<PopularMoviesState>
     implements PopularMoviesCubit {}
@@ -66,5 +69,29 @@ void main() {
     await tester.pumpWidget(_makeTestableWidget(const PopularMoviesPage()));
 
     expect(textFinder, findsOneWidget);
+  });
+
+  testWidgets('page should show MovieCard when Search Has Data',
+      (WidgetTester tester) async {
+    when(() => mockPopularMoviesCubit.state)
+        .thenReturn(PopularMoviesHasData([testMovie]));
+
+    final movieCardFinder = find.byType(MovieCard);
+
+    await tester.pumpWidget(_makeTestableWidget(const PopularMoviesPage()));
+
+    expect(movieCardFinder, findsOneWidget);
+  });
+
+  testWidgets('page should can tap back button', (WidgetTester tester) async {
+    when(() => mockPopularMoviesCubit.state)
+        .thenReturn(const PopularMoviesHasData(<Movie>[]));
+
+    final buttonFinder = find.byKey(const Key('back_button'));
+
+    await tester.pumpWidget(_makeTestableWidget(const PopularMoviesPage()));
+    await tester.tap(buttonFinder);
+
+    expect(buttonFinder, findsOneWidget);
   });
 }

@@ -70,6 +70,7 @@ class TvSearchPage extends StatelessWidget {
                   );
                 } else {
                   return Expanded(
+                    key: Key('empty'),
                     child: Container(),
                   );
                 }

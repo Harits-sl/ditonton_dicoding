@@ -108,6 +108,24 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.getNowPlayingMovies())
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.getNowPlayingMovies();
+      // assert
+      verify(mockRemoteDataSource.getNowPlayingMovies());
+      expect(
+        result,
+        equals(
+          Left(
+            CommonFailure('Certificated not valid\nHandshake error in client'),
+          ),
+        ),
+      );
+    });
   });
 
   group('Popular Movies', () {
@@ -148,6 +166,22 @@ void main() {
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
     });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.getPopularMovies())
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.getPopularMovies();
+      // assert
+      verify(mockRemoteDataSource.getPopularMovies());
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
+    });
   });
 
   group('Top Rated Movies', () {
@@ -186,6 +220,22 @@ void main() {
       // assert
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.getTopRatedMovies())
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.getTopRatedMovies();
+      // assert
+      verify(mockRemoteDataSource.getTopRatedMovies());
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
     });
   });
 
@@ -254,6 +304,22 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.getMovieDetail(tId))
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.getMovieDetail(tId);
+      // assert
+      verify(mockRemoteDataSource.getMovieDetail(tId));
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
+    });
   });
 
   group('Get Movie Recommendations', () {
@@ -300,6 +366,22 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.getMovieRecommendations(tId))
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.getMovieRecommendations(tId);
+      // assert
+      verify(mockRemoteDataSource.getMovieRecommendations(tId));
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
+    });
   });
 
   group('Seach Movies', () {
@@ -340,6 +422,22 @@ void main() {
       // assert
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockRemoteDataSource.searchMovies(tQuery))
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.searchMovies(tQuery);
+      // assert
+      verify(mockRemoteDataSource.searchMovies(tQuery));
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
     });
   });
 

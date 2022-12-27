@@ -105,6 +105,22 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockTvRemoteDataSource.getNowPlayingTvs())
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.getNowPlayingTvs();
+      // assert
+      verify(mockTvRemoteDataSource.getNowPlayingTvs());
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
+    });
   });
 
   group('get popular tvs', () {
@@ -147,6 +163,22 @@ void main() {
       verify(mockTvRemoteDataSource.getPopularTvs());
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
+    });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockTvRemoteDataSource.getPopularTvs())
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.getPopularTvs();
+      // assert
+      verify(mockTvRemoteDataSource.getPopularTvs());
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
     });
   });
 
@@ -191,6 +223,22 @@ void main() {
       verify(mockTvRemoteDataSource.getTopRatedTvs());
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
+    });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockTvRemoteDataSource.getTopRatedTvs())
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.getTopRatedTvs();
+      // assert
+      verify(mockTvRemoteDataSource.getTopRatedTvs());
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
     });
   });
 
@@ -279,6 +327,22 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockTvRemoteDataSource.getTvDetail(tId))
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.getTvDetail(tId);
+      // assert
+      verify(mockTvRemoteDataSource.getTvDetail(tId));
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
+    });
   });
 
   group('Get Tv Recommendations', () {
@@ -324,6 +388,22 @@ void main() {
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockTvRemoteDataSource.getTvRecommendations(tId))
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.getTvRecommendations(tId);
+      // assert
+      verify(mockTvRemoteDataSource.getTvRecommendations(tId));
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
+    });
   });
 
   group('Seach Tvs', () {
@@ -364,6 +444,22 @@ void main() {
       // assert
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+
+    test('should return common failure when certificated not valid', () async {
+      // arrange
+      when(mockTvRemoteDataSource.searchTvs(tQuery))
+          .thenThrow(TlsException('Handshake error in client'));
+      // act
+      final result = await repository.searchTvs(tQuery);
+      // assert
+      verify(mockTvRemoteDataSource.searchTvs(tQuery));
+      expect(
+        result,
+        equals(Left(
+          CommonFailure('Certificated not valid\nHandshake error in client'),
+        )),
+      );
     });
   });
 
