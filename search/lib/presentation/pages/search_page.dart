@@ -70,6 +70,7 @@ class SearchPage extends StatelessWidget {
                   );
                 } else {
                   return Expanded(
+                    key: Key('empty'),
                     child: Container(),
                   );
                 }

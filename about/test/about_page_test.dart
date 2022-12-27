@@ -19,5 +19,7 @@ void main() {
     expect(find.byType(Image), findsOneWidget);
     expect(find.text(AboutPage.aboutText), findsOneWidget);
     expect(find.byIcon(Icons.arrow_back), findsOneWidget);
+
+    tester.tap(find.byIcon(Icons.arrow_back));
   });
 }

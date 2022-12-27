@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
@@ -169,6 +170,41 @@ void main() {
           .pumpWidget(_makeTestableWidget(const MovieDetailPage(id: 1)));
 
       expect(keyEmpty, findsOneWidget);
+    });
+  });
+
+  group('detail page', () {
+    testWidgets('page should have Widget CachedNetworkImage',
+        (WidgetTester tester) async {
+      when(() => mockMovieDetailCubit.state)
+          .thenReturn(MovieDetailHasData(testMovieDetail));
+      when(() => mockMovieRecommendationCubit.state)
+          .thenReturn(MovieRecommendationHasData([testMovie]));
+      when(() => mockWatchlistBloc.state)
+          .thenReturn(const WatchlistStatus(false));
+
+      final imageFinder = find.byType(CachedNetworkImage);
+
+      await tester
+          .pumpWidget(_makeTestableWidget(const MovieDetailPage(id: 1)));
+
+      expect(imageFinder, findsWidgets);
+    });
+    testWidgets('page should can tap back button', (WidgetTester tester) async {
+      when(() => mockMovieDetailCubit.state)
+          .thenReturn(MovieDetailHasData(testMovieDetail));
+      when(() => mockMovieRecommendationCubit.state)
+          .thenReturn(const MovieRecommendationHasData(<Movie>[]));
+      when(() => mockWatchlistBloc.state)
+          .thenReturn(const WatchlistStatus(false));
+
+      final buttonFinder = find.byKey(const Key('back_button'));
+
+      await tester
+          .pumpWidget(_makeTestableWidget(const MovieDetailPage(id: 1)));
+      await tester.tap(buttonFinder);
+
+      expect(buttonFinder, findsOneWidget);
     });
   });
 }

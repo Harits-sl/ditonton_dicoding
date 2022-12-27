@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -104,6 +105,42 @@ void main() {
     ],
     verify: (bloc) {
       verify(mockGetWatchListStatus.execute(tId));
+      verify(mockRemoveWatchlist.execute(testMovieDetail));
+    },
+  );
+
+  blocTest<WatchlistBloc, WatchlistState>(
+    'Should emit [Error] when OnButtonAddWatchlistTapped failure',
+    build: () {
+      when(mockSaveWatchlist.execute(testMovieDetail))
+          .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+      return watchlistBloc;
+    },
+    act: (bloc) {
+      bloc.add(OnButtonAddWatchlistTapped(testMovieDetail));
+    },
+    expect: () => [
+      const WatchlistError('Failed'),
+    ],
+    verify: (bloc) {
+      verify(mockSaveWatchlist.execute(testMovieDetail));
+    },
+  );
+
+  blocTest<WatchlistBloc, WatchlistState>(
+    'Should emit [Error] when OnButtonRemoveWatchlistTapped failure',
+    build: () {
+      when(mockRemoveWatchlist.execute(testMovieDetail))
+          .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+      return watchlistBloc;
+    },
+    act: (bloc) {
+      bloc.add(OnButtonRemoveWatchlistTapped(testMovieDetail));
+    },
+    expect: () => [
+      const WatchlistError('Failed'),
+    ],
+    verify: (bloc) {
       verify(mockRemoveWatchlist.execute(testMovieDetail));
     },
   );

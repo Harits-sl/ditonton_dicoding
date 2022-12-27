@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -88,6 +89,42 @@ void main() {
     ],
     verify: (bloc) {
       verify(mockGetWatchlistTvStatus.execute(tId));
+      verify(mockRemoveWatchlistTv.execute(testTvDetail));
+    },
+  );
+
+  blocTest<TvWatchlistBloc, TvWatchlistState>(
+    'Should emit [Error] when OnButtonAddWatchlistTapped failure',
+    build: () {
+      when(mockSaveWatchlistTv.execute(testTvDetail))
+          .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+      return tvWatchlistBloc;
+    },
+    act: (bloc) {
+      bloc.add(OnButtonAddTvWatchlistTapped(testTvDetail));
+    },
+    expect: () => [
+      const TvWatchlistError('Failed'),
+    ],
+    verify: (bloc) {
+      verify(mockSaveWatchlistTv.execute(testTvDetail));
+    },
+  );
+
+  blocTest<TvWatchlistBloc, TvWatchlistState>(
+    'Should emit [Error] when OnButtonRemoveWatchlistTapped failure',
+    build: () {
+      when(mockRemoveWatchlistTv.execute(testTvDetail))
+          .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+      return tvWatchlistBloc;
+    },
+    act: (bloc) {
+      bloc.add(OnButtonRemoveTvWatchlistTapped(testTvDetail));
+    },
+    expect: () => [
+      const TvWatchlistError('Failed'),
+    ],
+    verify: (bloc) {
       verify(mockRemoveWatchlistTv.execute(testTvDetail));
     },
   );

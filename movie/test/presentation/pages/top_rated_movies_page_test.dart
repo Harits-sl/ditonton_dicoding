@@ -6,6 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:movie/movie.dart';
 
+import '../../dummy_data/dummy_objects.dart';
+
 class MockTopRatedMoviesCubit extends MockCubit<TopRatedMoviesState>
     implements TopRatedMoviesCubit {}
 
@@ -66,5 +68,29 @@ void main() {
     await tester.pumpWidget(_makeTestableWidget(const TopRatedMoviesPage()));
 
     expect(textFinder, findsOneWidget);
+  });
+
+  testWidgets('page should show MovieCard when Search Has Data',
+      (WidgetTester tester) async {
+    when(() => mockTopRatedMoviesCubit.state)
+        .thenReturn(TopRatedMoviesHasData([testMovie]));
+
+    final movieCardFinder = find.byType(MovieCard);
+
+    await tester.pumpWidget(_makeTestableWidget(const TopRatedMoviesPage()));
+
+    expect(movieCardFinder, findsOneWidget);
+  });
+
+  testWidgets('page should can tap back button', (WidgetTester tester) async {
+    when(() => mockTopRatedMoviesCubit.state)
+        .thenReturn(const TopRatedMoviesHasData(<Movie>[]));
+
+    final buttonFinder = find.byKey(const Key('back_button'));
+
+    await tester.pumpWidget(_makeTestableWidget(const TopRatedMoviesPage()));
+    await tester.tap(buttonFinder);
+
+    expect(buttonFinder, findsOneWidget);
   });
 }
